@@ -3,25 +3,46 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --violet: #000;
+  --icon-color: #a6acb8;
+  --secondary-900: #040815;
+  --secondary-400: #596780;
+  --semibold-color: #757575;
+  --light-bg: #f8f5ff;
+  --bellbg: #9b9fab;
+  --secondary-500: #1a202c;
+  --search-input-color: #4f5867;
+  --arsenic: #404045;
+  --grey: #7c7c82;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Plus Jakarta Sans";
+}
+
+.mantine-Input-input:focus {
+  outline: none !important;
+}
+
+.mantine-Input-input {
+  border: none !important;
+}
+
+/* svg {
+  /* fill: currentColor;
+} */
+.apexcharts-legend.apx-legend-position-right {
+  justify-content: center !important;
+}
+
+.recharts-bar-rectangle {
+  clip-path: inset(0% 0% -11% 0% round 20px) !important;
+}
+
+.apexcharts-legend-marker {
+  border-radius: 0px !important;
+}
+
+.recharts-cartesian-axis-tick {
+  font-size: 12px !important;
 }

@@ -1,0 +1,13 @@
+import Image from "next/image";
+import React from "react";
+
+export function AddClientButton() {
+  return (
+    <button className="pl-12 py-10 bg-[var(--violet)] rounded flex gap-1 text-white text-14 pr-35 items-center">
+      <figure className="relative w-24 h-24">
+        <Image src="/plus-sign.svg" fill alt="plus icon"></Image>
+      </figure>
+      <span>Add new Clients</span>
+    </button>
+  );
+}
