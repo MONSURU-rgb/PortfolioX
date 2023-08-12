@@ -134,7 +134,7 @@ function FirstSidebarList() {
 
 export function Sidebar() {
   return (
-    <div className="fixed bg-white h-screen w-260">
+    <div className="fixed bg-white h-screen w-260 max-[768px]:hidden">
       <Logo className="pl-32 pt-22" />
       <section className="flex flex-col justify-between h-full">
         <FirstSidebarList />

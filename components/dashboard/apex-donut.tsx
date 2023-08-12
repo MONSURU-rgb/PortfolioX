@@ -19,6 +19,7 @@ class Donut extends Component<{}, DonutState> {
         dataLabels: {
           enabled: false,
         },
+
         plotOptions: {
           pie: {
             donut: {
@@ -58,6 +59,7 @@ class Donut extends Component<{}, DonutState> {
             series={this.state.series}
             type="donut"
             width="380"
+            aspect="1.4/1"
           />
         )}
       </div>

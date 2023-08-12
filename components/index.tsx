@@ -6,3 +6,4 @@ export * from "./industries";
 export * from "./customers";
 export * from "./messages";
 export * from "./calls";
+export * from "./add-client";

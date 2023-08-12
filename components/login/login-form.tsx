@@ -82,7 +82,7 @@ export function LoginForm() {
   };
 
   return (
-    <div className="w-1/2 flex flex-col pt-56 gap-69 max-[860px]:w-full justify-center h-[calc(100vh-88px)] overflow-clip">
+    <div className="min-[860px]:w-1/2 flex flex-col pt-56 gap-69 !justify-center h-[calc(100vh-88px)] overflow-clip">
       <section className="grid gap-[clamp(13px,1.2vw,19px)]">
         <article>
           <h3 className="text-20 font-semibold text-[var(--semibold-color)]">

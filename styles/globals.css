@@ -39,10 +39,64 @@ body {
   clip-path: inset(0% 0% -11% 0% round 20px) !important;
 }
 
+thead,
+tr {
+  clip-path: inset(0% 0% -1% 0% round 10px) !important;
+}
+
 .apexcharts-legend-marker {
   border-radius: 0px !important;
 }
 
 .recharts-cartesian-axis-tick {
   font-size: 12px !important;
+}
+
+.mantine-DateInput-icon {
+  left: 70% !important;
+}
+
+.mantine-DateInput-input {
+  min-height: 24px !important;
+}
+
+.mantine-gszoqu[data-with-icon] {
+  padding-left: 12px !important;
+}
+
+th,
+td {
+  border-bottom: none !important;
+  border-top: none !important;
+}
+
+.mantine-1lhu8g5[data-striped] > tbody > tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+
+.mantine-Group-root {
+  justify-content: flex-end !important;
+}
+
+svg[id="SvgjsSvg1067"] {
+  width: 100% !important;
+  height: 224.7;
+  transform: translate(0, 0);
+}
+svg[id="SvgjsSvg1111"] {
+  width: 100% !important;
+  height: 224.7;
+  transform: translate(0, 0);
+}
+
+/* .apexcharts-theme-light {
+  width: 100% !important;
+  height: 224.7;
+  transform: translate(0, 0);
+} */
+
+.apexcharts-svg {
+  width: 100% !important;
+  height: 224.7;
+  transform: translate(0, 0);
 }

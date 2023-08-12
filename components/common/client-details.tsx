@@ -12,7 +12,11 @@ interface ClientDetailsProps {
 }
 
 export function ClientDetails() {
-  const [counter, setCounter] = usePortal<ClientDetailsProps>("key");
+  const [counter, setCounter] = usePortal.local<ClientDetailsProps | undefined>(
+    "key",
+    undefined
+  );
+
   return (
     <div className="flex gap-40 items-center">
       <section className="w-44 h-44 rounded-full p-1 bg-[#FAF5FF]">

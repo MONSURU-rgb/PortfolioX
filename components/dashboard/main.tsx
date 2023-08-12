@@ -17,6 +17,7 @@ import {
 } from "recharts";
 import Donut from "./apex-donut";
 import DownArrow from "@/public/down-arrow";
+import CustomersListTable from "./customers-list-table";
 // import Example from "./table";
 // import { DemoPie } from "./Doughnut";
 
@@ -123,7 +124,7 @@ const renderShape = (props: any) => {
 
 const RenderBarChart = () => {
   return (
-    <ResponsiveContainer width="90%" height={250}>
+    <ResponsiveContainer width="93%" height={250}>
       <BarChart width={630} data={data} height={250}>
         <XAxis dataKey="name" stroke="#5F6868" />
         <YAxis dataKey="uv" />
@@ -146,17 +147,19 @@ export default RenderBarChart;
 function BarChart1() {
   return (
     <>
-      <section className="px-30 pb-24 pt-32 bg-white flex flex-col gap-51 !w-7/12 rounded-[14px]">
+      <section className="px-30 pb-24 pt-32 bg-white flex flex-col gap-51 w-7/12 rounded-[14px] max-[760px]:!w-full">
         <article className="flex justify-between items-center">
           <h2 className="text-[var(--arsenic)] text-18 font-medium">Clients</h2>
           <h3 className="text-[var(--grey)] text-12">
             Number of clients by industry
           </h3>
         </article>
-        <RenderBarChart />
+        <article className="min-w-[400px]">
+          <RenderBarChart />
+        </article>
       </section>
 
-      <section className="bg-white pl-51 pt-34 rounded-[14px] !w-5/12 pr-40">
+      <section className="bg-white pl-51 pt-34 rounded-[14px] w-fit pr-40 max-[760px]:!w-full">
         {" "}
         <SecondChart />
       </section>
@@ -167,12 +170,12 @@ function BarChart1() {
 function SecondChart() {
   return (
     <>
-      <article className="flex justify-between items-center pb-24">
+      <article className="flex justify-between items-center pb-24 overflow-x-scroll w-full">
         <h2 className="text-[var(--arsenic)] text-16 font-medium">
           Top Clients By Sector
         </h2>
         <button className="text-[var(--grey)] text-12 flex rounded-[10px] p-2 gap-1 items-center">
-          <span className="text-[var(--violet)] text-[11px]">Volume</span>
+          <span className="text-[var(--grey)] text-12">Volume</span>
           <DownArrow />
         </button>
       </article>
@@ -185,13 +188,13 @@ function SecondChart() {
 
 export function Main() {
   return (
-    <main className="ml-260 !w-full bg-[#F8F5FF]">
+    <main className="ml-260 !w-full bg-[#F8F5FF] max-[768px]:!ml-0">
       <NavBarCommon />
-      <section className="p-30 flex gap-30">
+      <section className="p-30 flex gap-30 !overflow-x-scroll max-[585px]:flex-col">
         <BarChart1 />
         {/* <SecondChart /> */}
       </section>{" "}
-      {/* <Example /> */}
+      <CustomersListTable />
     </main>
   );
 }

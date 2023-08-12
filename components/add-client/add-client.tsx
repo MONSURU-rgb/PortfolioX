@@ -1,13 +1,12 @@
 import React from "react";
-import { NavBarCommon } from "@/components";
 import { Sidebar } from "../sidebar/sidebar";
-import MainCustomer from "./main-customer";
+import AddClientMain from "./add-client-main";
 
-export function CustomerMain() {
+export function AddClient() {
   return (
     <div className="bg-[var(--light-bg)] flex">
       <Sidebar />
-      <MainCustomer />
+      <AddClientMain />
     </div>
   );
 }
