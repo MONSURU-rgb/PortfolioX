@@ -19,7 +19,7 @@ module.exports = {
       colors: {},
       spacing: {
         12: "clamp(10px,0.7vw,12px)",
-        18: "clamp(16px,1.13vw,18px)",
+        18: "clamp(10px,1.13vw,18px)",
         24: "clamp(20px,1.5vw,24px)",
         29: "clamp(18px,1.8vw,29px)",
         32: "clamp(20px,2vw,32px)",
@@ -32,7 +32,7 @@ module.exports = {
         60: "clamp(38px,3.75vw,60px)",
         69: "clamp(40px,4.3vw,69px)",
         20: "clamp(15px,1.3vw,20px)",
-        22: "clamp(15px,1.4vw,22px)",
+        22: "clamp(10px,1.4vw,22px)",
         89: "clamp(50px,5.6vw,89px)",
         128: "clamp(98px,8vw,128px)",
         30: "clamp(23px,1.9vw,30px)",
@@ -49,11 +49,11 @@ module.exports = {
       },
 
       fontSize: {
-        24: "clamp(20px,1.5vw,24px)",
-        20: "clamp(15px,1.3vw,20px)",
+        24: "clamp(16px,1.5vw,24px)",
+        20: "clamp(12px,1.3vw,20px)",
         18: "clamp(16px,1.13vw,18px)",
         16: "clamp(12px,1vw,16px)",
-        35: "clamp(28px,2.2vw,35px)",
+        35: "clamp(20px,2.2vw,35px)",
         14: "clamp(10px,0.9vw,14px)",
         12: "clamp(9px,0.8vw,12px)",
       },

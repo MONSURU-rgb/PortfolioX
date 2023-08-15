@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { usePortal } from "@ibnlanre/portal";
+import { useQuery } from "react-query";
 
 interface ButtonProps extends ComponentProps<"button"> {
   text?: string;
@@ -59,6 +60,19 @@ export function LoginForm() {
   });
 
   const values = form.values;
+
+  const { data, isLoading } = useQuery("key", async () => {
+    try {
+      const { data } = await API.get(
+        `https://jsonplaceholder.typicode.com/todos/1`
+      );
+      return data;
+    } catch (error) {
+      return error;
+    }
+  });
+
+  console.log(data);
 
   const fetchData = async (values: IProgress) => {
     setLoading(true);

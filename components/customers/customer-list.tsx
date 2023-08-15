@@ -6,7 +6,7 @@ import { CustomerListPagination } from "./customer-list-pagination";
 function CustomerList() {
   return (
     <>
-      <div className="py-40 px-34 flex gap-x-28 gap-y-30 flex-wrap">
+      <div className="py-40 px-34 flex gap-x-28 gap-y-30 flex-wrap justify-center">
         {customerDataList.map((data) => (
           <div
             className="pt-22 pl-20 pb-28 pr-30 bg-white flex flex-col gap-16 w-200 rounded-[10px] basis-[23.4%]"

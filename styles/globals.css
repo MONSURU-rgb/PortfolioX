@@ -78,7 +78,7 @@ td {
   justify-content: flex-end !important;
 }
 
-svg[id="SvgjsSvg1067"] {
+/* svg[id="SvgjsSvg1067"] {
   width: 100% !important;
   height: 224.7;
   transform: translate(0, 0);
@@ -87,7 +87,7 @@ svg[id="SvgjsSvg1111"] {
   width: 100% !important;
   height: 224.7;
   transform: translate(0, 0);
-}
+} */
 
 /* .apexcharts-theme-light {
   width: 100% !important;
@@ -99,4 +99,10 @@ svg[id="SvgjsSvg1111"] {
   width: 100% !important;
   height: 224.7;
   transform: translate(0, 0);
+}
+
+@media (max-width: 768px) {
+  .apx-legend-position-right {
+    padding-right: 10% !important;
+  }
 }

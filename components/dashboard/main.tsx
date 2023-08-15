@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NavBarCommon } from "..";
 // import ApexCharts from "apexcharts";
 const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
@@ -122,7 +122,12 @@ const renderShape = (props: any) => {
   );
 };
 
-const RenderBarChart = () => {
+export const RenderBarChart = () => {
+  const [size, setSize] = useState(40);
+  useEffect(() => {
+    window.innerWidth <= 800 ? setSize(20) : setSize(40);
+  }, []);
+
   return (
     <ResponsiveContainer width="93%" height={250}>
       <BarChart width={630} data={data} height={250}>
@@ -132,7 +137,7 @@ const RenderBarChart = () => {
         <Bar
           dataKey="uv"
           fill="#8884d8"
-          barSize={40}
+          barSize={size}
           shape={<CustomBar />}
           // radius={[25, 25, 0, 0]}
           // Use the custom shape function
@@ -141,8 +146,6 @@ const RenderBarChart = () => {
     </ResponsiveContainer>
   );
 };
-
-export default RenderBarChart;
 
 function BarChart1() {
   return (
@@ -154,12 +157,12 @@ function BarChart1() {
             Number of clients by industry
           </h3>
         </article>
-        <article className="min-w-[400px]">
+        <article>
           <RenderBarChart />
         </article>
       </section>
 
-      <section className="bg-white pl-51 pt-34 rounded-[14px] w-fit pr-40 max-[760px]:!w-full">
+      <section className="bg-white pl-51 pt-34 rounded-[14px] w-5/12 pr-40 max-[760px]:!w-full">
         {" "}
         <SecondChart />
       </section>
@@ -170,7 +173,7 @@ function BarChart1() {
 function SecondChart() {
   return (
     <>
-      <article className="flex justify-between items-center pb-24 overflow-x-scroll w-full">
+      <article className="flex justify-between items-center pb-24 overflow-x-auto">
         <h2 className="text-[var(--arsenic)] text-16 font-medium">
           Top Clients By Sector
         </h2>
@@ -190,7 +193,7 @@ export function Main() {
   return (
     <main className="ml-260 !w-full bg-[#F8F5FF] max-[768px]:!ml-0">
       <NavBarCommon />
-      <section className="p-30 flex gap-30 !overflow-x-scroll max-[585px]:flex-col">
+      <section className="p-30 flex gap-30 !overflow-x-auto max-[585px]:flex-col">
         <BarChart1 />
         {/* <SecondChart /> */}
       </section>{" "}

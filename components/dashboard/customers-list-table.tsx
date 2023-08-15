@@ -12,8 +12,8 @@ function CustomersListTable() {
   const test = "Active";
 
   return (
-    <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30">
-      <section className="flex justify-between pb-22 items-center">
+    <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30 max-[580px]:overflow-x-auto">
+      <section className="flex justify-between pb-22 items-center flex-wrap max-[580px]:overflow-x-auto">
         <h2 className="text-18 font-medium text-[#191635]">Customers List</h2>
         <article className="flex gap-45">
           <button className="rounded-[5px] bg-[var(--violet)] px-34 py-12 text-white text-[13px] font-medium leading-none max-[725px]:hidden">

@@ -2,6 +2,9 @@ import { usePortal } from "@ibnlanre/portal";
 import { Avatar, Indicator } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
+import { HamburgerButton } from "./hamburger";
+import { useDisclosure } from "@mantine/hooks";
+import { DrawerContent } from "../dashboard/drawer";
 
 interface ClientDetailsProps {
   email: string;
@@ -11,11 +14,18 @@ interface ClientDetailsProps {
   token: string;
 }
 
+interface ModalType {
+  opened: boolean;
+  close: () => void;
+}
+
 export function ClientDetails() {
   const [counter, setCounter] = usePortal.local<ClientDetailsProps | undefined>(
     "key",
     undefined
   );
+  const [openDrawer, { open: opened, close: closeDrawer }] =
+    useDisclosure(false);
 
   return (
     <div className="flex gap-40 items-center">
@@ -38,9 +48,15 @@ export function ClientDetails() {
             {counter?.first_name} {counter?.last_name}
           </figcaption>
         </section>
-        <figure className="relative w-20 h-20 aspect-square">
-          <Image src="/arrow-down.png" alt="arrow down icon" fill></Image>
-        </figure>
+        <section>
+          <figure className="relative w-20 h-20 aspect-square max-[768px]:hidden">
+            <Image src="/arrow-down.png" alt="arrow down icon" fill></Image>
+          </figure>
+          <button className="min-[768px]:hidden">
+            <HamburgerButton onClick={opened} />
+          </button>
+        </section>
+        <DrawerContent opened={openDrawer} close={closeDrawer} />
       </div>
     </div>
   );

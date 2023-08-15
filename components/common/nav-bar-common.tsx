@@ -6,7 +6,7 @@ import { ClientDetails } from "./client-details";
 export function NavBarCommon() {
   const [mobileResponsive, setMobileResponsive] = useState(false);
   useEffect(() => {
-    if (window.innerWidth === 768) {
+    if (window.innerWidth <= 768) {
       setMobileResponsive(true);
     }
   }, []);

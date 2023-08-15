@@ -4,7 +4,7 @@ import { MantineProvider } from "@mantine/core";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Dispatch, SetStateAction } from "react";
-import PortalProvider, { usePortal } from "@ibnlanre/portal";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 interface IAuthUser {
   first_name?: string;
@@ -15,6 +15,8 @@ interface IAuthUser {
   token?: string;
 }
 
+const queryClient = new QueryClient();
+
 export interface IContextType {
   authUser: IAuthUser | null;
   setAuthUser: Dispatch<SetStateAction<IAuthUser | null>>;
@@ -24,8 +26,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     // <PortalProvider>
     <MantineProvider withGlobalStyles withNormalizeCSS>
-      <ToastContainer />
-      <Component {...pageProps} />
+      <QueryClientProvider client={queryClient}>
+        <ToastContainer />
+        <Component {...pageProps} />
+      </QueryClientProvider>
     </MantineProvider>
     // </PortalProvider>
   );
