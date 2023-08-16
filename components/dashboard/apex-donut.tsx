@@ -56,7 +56,7 @@ const Donut: React.FC = () => {
           options={donutState.options}
           series={donutState.series}
           type="donut"
-          width="320"
+          width="100%"
           // height="400"
         />
       )}
