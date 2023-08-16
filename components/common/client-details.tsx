@@ -37,13 +37,12 @@ export function ClientDetails() {
 
       <div className="flex gap-30 items-center">
         <section className="flex gap-12 items-center">
-          <figure className="relative w-44 h-44 rounded-full">
-            <Image
-              src={counter?.profile_picture}
-              alt="Client Name"
-              fill
-              className="!rounded-full"></Image>
-          </figure>
+          <img
+            src={`${counter?.profile_picture}`}
+            alt="Client Name"
+            // fill
+            className="!rounded-full w-44 h-44"></img>
+
           <figcaption className="text-[var(--secondary-500)] text-16 font-semibold">
             {counter?.first_name} {counter?.last_name}
           </figcaption>
