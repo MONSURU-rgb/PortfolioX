@@ -1,5 +1,6 @@
 import React from "react";
 import { SecondChart } from "../dashboard/main";
+import { Divider } from "@mantine/core";
 
 export function PortfolioMainComponent() {
   return (
@@ -12,4 +13,8 @@ export function PortfolioMainComponent() {
       </section>
     </div>
   );
+}
+
+function TopNews() {
+  return <div></div>;
 }
