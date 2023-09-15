@@ -9,13 +9,13 @@ const ThemeChanger = () => {
 
   return (
     <div>
-      {resolvedTheme}
+      {/* {resolvedTheme}
       <button
         className={resolvedTheme === "light" ? "#A3AEDO" : "#ffffff"}
         onClick={() => setTheme("light")}>
         Light Mode
       </button>
-      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button> */}
     </div>
   );
 };
