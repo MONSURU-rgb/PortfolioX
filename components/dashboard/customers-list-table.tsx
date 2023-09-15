@@ -3,7 +3,7 @@ import { DateInput } from "@mantine/dates";
 import { CalendarMonth } from "./data-icon";
 import { Button, Popover, Table } from "@mantine/core";
 import { ArrowDropDown } from "./drop-down";
-import ActionIcon from "./action-icon";
+// import ActionIcon from "./action-icon";
 import { data1 } from "./data-for-table";
 import { builder } from "@/api/builder";
 import { token } from "@/api/axios-config";
@@ -146,9 +146,7 @@ function CustomersListTable() {
                 <td>
                   {tester.first_name} {tester.last_name}
                 </td>
-                <td>
-                  <ActionIcon />
-                </td>
+                <td>{/* <ActionIcon /> */}</td>
                 <td>
                   {item.status === true ? (
                     <span className="text-[#56C456] text-12 px-18 py-2 bg-[#F5FBF5]">
