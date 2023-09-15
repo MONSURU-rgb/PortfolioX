@@ -18,6 +18,7 @@
 
 body {
   font-family: "Plus Jakarta Sans";
+  background: #f8f5ff !important;
 }
 
 .mantine-Input-input:focus {
@@ -78,23 +79,6 @@ td {
   justify-content: flex-end !important;
 }
 
-/* svg[id="SvgjsSvg1067"] {
-  width: 100% !important;
-  height: 224.7;
-  transform: translate(0, 0);
-}
-svg[id="SvgjsSvg1111"] {
-  width: 100% !important;
-  height: 224.7;
-  transform: translate(0, 0);
-} */
-
-/* .apexcharts-theme-light {
-  width: 100% !important;
-  height: 224.7;
-  transform: translate(0, 0);
-} */
-
 .apexcharts-svg {
   width: 100% !important;
   height: 224.7;
@@ -106,3 +90,13 @@ svg[id="SvgjsSvg1111"] {
     padding-right: 10% !important;
   }
 }
+
+.mantine-Group-root {
+  justify-content: center !important;
+}
+
+/* @media (max-width: 768px) {
+  .mantine-1yhh8e {
+    flex-direction: row !important;
+  }
+} */

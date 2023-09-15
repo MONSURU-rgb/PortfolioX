@@ -7,12 +7,26 @@ import { API } from "@/api/axios-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
-import { usePortal } from "@ibnlanre/portal";
-import { useQuery } from "react-query";
+import { cookieStorage, usePortal } from "@ibnlanre/portal";
+import { useMutation, useQuery } from "react-query";
+import { builder } from "@/api/builder";
+import { token } from "@/api/axios-config";
 
 interface ButtonProps extends ComponentProps<"button"> {
   text?: string;
   loading?: boolean;
+}
+
+export interface LoggedInUserProps {
+  email: string;
+  first_name: string;
+  last_name: string;
+  token: string;
+}
+
+export interface LogIn {
+  email: string;
+  password: string;
 }
 
 export function Button(props: ButtonProps) {
@@ -49,9 +63,7 @@ export function LoginForm() {
     },
 
     validate: (values: IProgress) => ({
-      email: values.email.match(/^\S+@afexnigeria\.com$/)
-        ? null
-        : "Invalid email",
+      email: values.email.match(/^\S+@email\.com$/) ? null : "Invalid email",
       password:
         values.password.length > 8
           ? null
@@ -61,39 +73,55 @@ export function LoginForm() {
 
   const values = form.values;
 
-  const { data, isLoading } = useQuery("key", async () => {
-    try {
-      const { data } = await API.get(
-        `https://jsonplaceholder.typicode.com/todos/1`
-      );
-      return data;
-    } catch (error) {
-      return error;
-    }
-  });
+  // const { data, isLoading } = useQuery("key", async () => {
+  //   try {
+  //     const { data } = await API.get(
+  //       `https://jsonplaceholder.typicode.com/todos/1`
+  //     );
+  //     return data;
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // });
 
-  console.log(data);
+  // console.log(data);
 
-  const fetchData = async (values: IProgress) => {
-    setLoading(true);
-    try {
-      const response = await API.post(`/account/login/`, values);
-      setLoading(false);
-      if (response.data) {
-        response.data?.token && push("/dashboard");
-        localStorage.setItem("my-user", JSON.stringify(response.data));
-        setAuthUser(response.data);
-      }
+  const { mutate } = useMutation({
+    mutationFn: async (values: LogIn) =>
+      await builder.use().account.api.sign_in(values),
+    mutationKey: builder.account.api.sign_in.get(),
+    onSuccess: (values) => {
+      cookieStorage.setItem("my-user", JSON.stringify(values?.data));
+      console.log(values?.data);
       toast.success("Logged in successfully!", {
         position: toast.POSITION.TOP_RIGHT,
+        autoClose: 3000,
       });
-    } catch (error) {
-      toast.error("Incorrect Credentials");
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+      push("/dashboard");
+    },
+  });
+
+  // const postData = async (values: IProgress) => {
+  //   setLoading(true);
+
+  //   try {
+  //     const response = await builder.use().account.api.sign_in(values);
+  //     if (response.data) {
+  //       response.data?.token && push("/dashboard");
+  //       cookieStorage.setItem("my-user", JSON.stringify(response.data));
+  //       setAuthUser(response.data);
+  //     }
+  //     setLoading(false);
+  //     toast.success("Logged in successfully!", {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //     });
+  //   } catch (error) {
+  //     toast.error("Incorrect Credentials");
+  //     setLoading(false);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   return (
     <div className="min-[860px]:w-1/2 flex flex-col pt-56 gap-69 !justify-center h-[calc(100vh-88px)] overflow-clip">
@@ -115,7 +143,7 @@ export function LoginForm() {
         <form
           className="flex flex-col gap-60"
           onSubmit={form.onSubmit((values) => {
-            fetchData(values);
+            mutate(values);
           })}>
           <section className="flex flex-col gap-40">
             <TextInput

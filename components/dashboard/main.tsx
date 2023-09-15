@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavBarCommon } from "..";
-// import ApexCharts from "apexcharts";
-const ApexCharts = dynamic(() => import("react-apexcharts"), { ssr: false });
-import dynamic from "next/dynamic";
+
+import Donut, { PieList } from "../common/mantinedonut";
 import {
   BarChart,
   Bar,
@@ -15,7 +14,7 @@ import {
   LineChart,
   Rectangle,
 } from "recharts";
-import Donut from "./apex-donut";
+// import Donut from "./apex-donut";
 import DownArrow from "@/public/down-arrow";
 import CustomersListTable from "./customers-list-table";
 // import Example from "./table";
@@ -150,7 +149,7 @@ export const RenderBarChart = () => {
 function BarChart1() {
   return (
     <>
-      <section className="px-30 pb-24 pt-32 bg-white flex flex-col gap-51 w-7/12 rounded-[14px] max-[760px]:!w-full">
+      <section className="px-30 pb-24 pt-32 bg-white flex flex-col gap-51 w-7/12 rounded-[14px] max-[1120px]:w-full">
         <article className="flex justify-between items-center">
           <h2 className="text-[var(--arsenic)] text-18 font-medium">Clients</h2>
           <h3 className="text-[var(--grey)] text-12">
@@ -162,7 +161,7 @@ function BarChart1() {
         </article>
       </section>
 
-      <section className="bg-white pl-51 pt-34 rounded-[14px] w-5/12 pr-40 max-[760px]:!w-full">
+      <section className="bg-white pl-51 pt-34 rounded-[14px] w-5/12 pr-40 max-[1120px]:!w-full">
         {" "}
         <SecondChart />
       </section>
@@ -172,8 +171,8 @@ function BarChart1() {
 
 function SecondChart() {
   return (
-    <>
-      <article className="flex justify-between items-center pb-24 overflow-x-auto">
+    <div className="flex-grow">
+      <article className="flex justify-between items-center pb-24 overflow-x-auto w-full flex-grow max-[1120px]:!w-full">
         <h2 className="text-[var(--arsenic)] text-16 font-medium">
           Top Clients By Sector
         </h2>
@@ -182,10 +181,11 @@ function SecondChart() {
           <DownArrow />
         </button>
       </article>
-      <article>
+      <article className="flex flex-wrap justify-center">
         <Donut />
+        <PieList />
       </article>
-    </>
+    </div>
   );
 }
 
@@ -193,11 +193,13 @@ export function Main() {
   return (
     <main className="ml-260 !w-full bg-[#F8F5FF] max-[768px]:!ml-0">
       <NavBarCommon />
-      <section className="p-30 flex gap-30 !overflow-x-auto max-[585px]:flex-col">
+      <section className="p-30 flex gap-30 !overflow-x-auto max-[1120px]:flex-col">
         <BarChart1 />
         {/* <SecondChart /> */}
       </section>{" "}
-      <CustomersListTable />
+      <article className="flex-grow">
+        <CustomersListTable />
+      </article>
     </main>
   );
 }

@@ -1,4 +1,4 @@
-import { usePortal } from "@ibnlanre/portal";
+import { cookieStorage, usePortal } from "@ibnlanre/portal";
 import { Avatar, Indicator } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
@@ -10,7 +10,6 @@ interface ClientDetailsProps {
   email: string;
   first_name: string;
   last_name: string;
-  profile_picture: string;
   token: string;
 }
 
@@ -20,9 +19,9 @@ interface ModalType {
 }
 
 export function ClientDetails() {
-  const [counter, setCounter] = usePortal.local<ClientDetailsProps | undefined>(
+  const [counter, setCounter] = usePortal<ClientDetailsProps>(
     "key",
-    undefined
+    JSON.parse(cookieStorage.getItem("my-user") as string)
   );
   const [openDrawer, { open: opened, close: closeDrawer }] =
     useDisclosure(false);
@@ -37,11 +36,11 @@ export function ClientDetails() {
 
       <div className="flex gap-30 items-center">
         <section className="flex gap-12 items-center">
-          <img
-            src={`${counter?.profile_picture}`}
+          <Image
+            src="/clientname.png"
             alt="Client Name"
-            // fill
-            className="!rounded-full w-44 h-44"></img>
+            fill
+            className="!relative !rounded-full !w-44 !h-44"></Image>
 
           <figcaption className="text-[var(--secondary-500)] text-16 font-semibold">
             {counter?.first_name} {counter?.last_name}

@@ -4,13 +4,40 @@ import { CalendarMonth } from "./data-icon";
 import { Button, Popover, Table } from "@mantine/core";
 import { ArrowDropDown } from "./drop-down";
 import ActionIcon from "./action-icon";
-import { data } from "./data-for-table";
+import { data1 } from "./data-for-table";
+import { builder } from "@/api/builder";
+import { token } from "@/api/axios-config";
+import { ClientList } from "../common/type";
+import { useQuery } from "react-query";
+import { cookieStorage, usePortal } from "@ibnlanre/portal";
 
 function CustomersListTable() {
   const [value, setValue] = useState<Date | null>(null);
   const [placeholderValue, setPlaceholderValue] = useState("Last Week");
   const test = "Active";
 
+  // const clientList = builder.use().users.fetch();
+
+  //ClientList
+
+  // console.log(clientList?.data);
+
+  const { data } = useQuery({
+    queryFn: async () => await builder.use().users.fetch(),
+    queryKey: builder.users.fetch.get(),
+  });
+
+  const customerList = data?.data?.data;
+  console.log(data?.data?.data);
+
+  const tester = JSON.parse(cookieStorage.getItem("my-user") as string);
+
+  //   const managerName = counter?.first_name;
+  // }
+  // {
+  //   counter?.last_name;
+
+  // const { client_first_name, client_last_name, gender } = customerList;
   return (
     <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30 max-[580px]:overflow-x-auto">
       <section className="flex justify-between pb-22 items-center flex-wrap max-[580px]:overflow-x-auto">
@@ -19,7 +46,7 @@ function CustomersListTable() {
           <button className="rounded-[5px] bg-[var(--violet)] px-34 py-12 text-white text-[13px] font-medium leading-none max-[725px]:hidden">
             Generate Report
           </button>
-          <figure className="rounded-[10px] bg-[#F8F5FF] pl-18 py-2 flex gap-12">
+          <figure className="rounded-[10px] bg-[#F8F5FF] pl-18 py-2 flex gap-12 flex-wrap justify-center">
             <button className="flex gap-32 items-center px-12">
               <DateInput
                 dateParser={(input) => {
@@ -119,19 +146,23 @@ function CustomersListTable() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
+            {customerList?.map((item: any) => (
               <tr
                 key={item.name}
                 className="text-14 text-[#737B7B] hover:!bg-[#F8F5FF] !rounded-[10px]">
-                <td>{item.name}</td>
-                <td>{item.portfolio}</td>
-                <td>{item.gender}</td>
-                <td>{item.manager}</td>
+                <td>
+                  {item?.client_first_name} {item?.client_last_name}
+                </td>
+                <td>{item?.client_industry?.industry_name}</td>
+                <td>male</td>
+                <td>
+                  {tester.first_name} {tester.last_name}
+                </td>
                 <td>
                   <ActionIcon />
                 </td>
                 <td>
-                  {item.status === "Active" ? (
+                  {item.status === true ? (
                     <span className="text-[#56C456] text-12 px-18 py-2 bg-[#F5FBF5]">
                       Active
                     </span>

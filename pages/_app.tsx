@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Dispatch, SetStateAction } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ThemeProvider } from "next-themes";
 
 interface IAuthUser {
   first_name?: string;
@@ -25,12 +26,14 @@ export interface IContextType {
 export default function App({ Component, pageProps }: AppProps) {
   return (
     // <PortalProvider>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
-      <QueryClientProvider client={queryClient}>
-        <ToastContainer />
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </MantineProvider>
+    <ThemeProvider attribute="class" enableSystem={false} enableColorScheme>
+      <MantineProvider withGlobalStyles withNormalizeCSS>
+        <QueryClientProvider client={queryClient}>
+          <ToastContainer />
+          <Component {...pageProps} />
+        </QueryClientProvider>
+      </MantineProvider>
+    </ThemeProvider>
     // </PortalProvider>
   );
 }

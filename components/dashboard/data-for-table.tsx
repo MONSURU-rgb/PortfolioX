@@ -1,4 +1,4 @@
-export const data = [
+export const data1 = [
   {
     name: "Akin Fergusion",
     portfolio: "Real Estate",

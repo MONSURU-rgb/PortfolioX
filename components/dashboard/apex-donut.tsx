@@ -1,67 +1,93 @@
-import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic"; // Import dynamic from Next.js
+// import React, { useState, useEffect } from "react";
+// import dynamic from "next/dynamic"; // Import dynamic from Next.js
 
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false }); // Load the Chart component dynamically
+// const Chart = dynamic(() => import("react-apexcharts"), { ssr: false }); // Load the Chart component dynamically
 
-interface DonutState {
-  options: any;
-  series: number[];
-  labels: string[];
-}
+// interface DonutState {
+//   options: any;
+//   series: number[];
+//   labels: string[];
+// }
 
-const Donut: React.FC = () => {
-  const [donutState, setDonutState] = useState<DonutState>({
-    labels: ["Civil Service", "Service", "Trading", "IT"],
-    options: {
-      dataLabels: {
-        enabled: false,
-      },
-      plotOptions: {
-        pie: {
-          donut: {
-            labels: {
-              show: true,
-              total: {
-                show: true,
-                label: "Top 4 Sector",
-                fontSize: "14px",
-                color: "#596780",
-                formatter: (value: any) => {
-                  return `$ ${value.globals.seriesTotals.reduce(
-                    (a: any, b: any) => a + b,
-                    0
-                  )}`;
-                },
-                align: "center", // Center align the labels
-                offsetX: 0, // Offset in the x-axis (adjust as needed)
-                offsetY: 0,
-              },
-            },
-          },
-        },
-      },
-    },
-    series: [40000, 19940, 10000, 19940],
-  });
+// const Donut: React.FC = () => {
+//   const [donutState, setDonutState] = useState<DonutState>({
+//     labels: ["Civil Service", "Service", "Trading", "IT"],
+//     options: {
+//       dataLabels: {
+//         enabled: false,
+//       },
+//       responsive: [
+//         {
+//           breakpoint: 480,
+//           options: {
+//             chart: {
+//               width: "100%",
+//               position: "left",
+//             },
+//             legend: {
+//               position: "bottom",
+//             },
+//           },
+//         },
 
-  useEffect(() => {
-    donutState.options.labels = donutState.labels;
-    setDonutState(donutState);
-  }, []);
+//         {
+//           breakpoint: 300,
+//           options: {
+//             chart: {
+//               width: "120%",
+//             },
+//             legend: {
+//               position: "bottom",
+//             },
+//           },
+//         },
+//       ],
+//       plotOptions: {
+//         pie: {
+//           donut: {
+//             labels: {
+//               show: true,
+//               total: {
+//                 show: true,
+//                 label: "Top 4 Sector",
+//                 fontSize: "12px",
+//                 color: "#596780",
+//                 formatter: (value: any) => {
+//                   return `$ ${value.globals.seriesTotals.reduce(
+//                     (a: any, b: any) => a + b,
+//                     0
+//                   )}`;
+//                 },
+//                 align: "center", // Center align the labels
+//                 offsetX: 0, // Offset in the x-axis (adjust as needed)
+//                 offsetY: 0,
+//               },
+//             },
+//           },
+//         },
+//       },
+//     },
+//     series: [40000, 19940, 10000, 19940],
+//   });
 
-  return (
-    <div className="donut">
-      {typeof window !== "undefined" && (
-        <Chart
-          options={donutState.options}
-          series={donutState.series}
-          type="donut"
-          width="100%"
-          // height="400"
-        />
-      )}
-    </div>
-  );
-};
+//   useEffect(() => {
+//     donutState.options.labels = donutState.labels;
+//     setDonutState(donutState);
+//   }, [donutState.options.labels]);
 
-export default Donut;
+//   return (
+//     <div className="donut">
+//       {typeof window !== "undefined" && (
+//         <Chart
+//           options={donutState.options}
+//           series={donutState.series}
+//           type="donut"
+//           width="100%"
+//           // height="400"
+//         />
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Donut;
