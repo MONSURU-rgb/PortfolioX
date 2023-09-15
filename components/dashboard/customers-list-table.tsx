@@ -144,7 +144,7 @@ function CustomersListTable() {
                 <td>{item?.client_industry?.industry_name}</td>
                 <td>male</td>
                 <td>
-                  {tester.first_name} {tester.last_name}
+                  {tester?.first_name} {tester?.last_name}
                 </td>
                 <td>
                   <ActionIcon />

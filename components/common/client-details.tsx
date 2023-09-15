@@ -7,9 +7,9 @@ import { useDisclosure } from "@mantine/hooks";
 import { DrawerContent } from "../dashboard/drawer";
 
 interface ClientDetailsProps {
-  email: string;
-  first_name: string;
-  last_name: string;
+  email?: string;
+  first_name?: string;
+  last_name?: string;
   token: string;
 }
 
