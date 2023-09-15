@@ -10,11 +10,11 @@ export const detailslist = [
   { color: "#C3FF44", text: "IT" },
 ];
 
-export default function Donut() {
+export default function Donut({ size }: { size: number }) {
   return (
     <Group position="center">
       <RingProgress
-        size={250}
+        size={size}
         thickness={32}
         styles={{
           root: {

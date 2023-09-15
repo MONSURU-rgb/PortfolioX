@@ -84,43 +84,6 @@ const CustomBar = (props: any) => {
   );
 };
 
-const renderShape = (props: any) => {
-  const { x, y, width, height, fill } = props;
-  const borderRadius = 10; // Border radius for the top corners
-
-  return (
-    <g>
-      {/* Rectangle */}
-      <rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={fill}
-        rx={borderRadius}
-        ry={borderRadius}
-      />
-
-      {/* Clip Path */}
-      <defs>
-        <clipPath id={`clip-path-${x}-${y}`}>
-          <rect x={x} y={y} width={width} height={height - borderRadius} />
-        </clipPath>
-      </defs>
-
-      {/* Inset Clip Path */}
-      <rect
-        x={x}
-        y={y}
-        width={width}
-        height={height}
-        fill={fill}
-        clipPath={`url(#clip-path-${x}-${y})`}
-      />
-    </g>
-  );
-};
-
 export const RenderBarChart = () => {
   const [size, setSize] = useState(40);
   useEffect(() => {
@@ -163,26 +126,24 @@ function BarChart1() {
 
       <section className="bg-white pl-51 pt-34 rounded-[14px] w-5/12 pr-40 max-[1120px]:!w-full">
         {" "}
-        <SecondChart />
+        <SecondChart text="Top Clients By Sector" size={250} />
       </section>
     </>
   );
 }
 
-function SecondChart() {
+export function SecondChart({ text, size }: { text: string; size: number }) {
   return (
     <div className="flex-grow">
       <article className="flex justify-between items-center pb-24 overflow-x-auto w-full flex-grow max-[1120px]:!w-full">
-        <h2 className="text-[var(--arsenic)] text-16 font-medium">
-          Top Clients By Sector
-        </h2>
+        <h2 className="text-[var(--arsenic)] text-16 font-medium">{text}</h2>
         <button className="text-[var(--grey)] text-12 flex rounded-[10px] p-2 gap-1 items-center">
           <span className="text-[var(--grey)] text-12">Volume</span>
           <DownArrow />
         </button>
       </article>
       <article className="flex flex-wrap justify-center">
-        <Donut />
+        <Donut size={size} />
         <PieList />
       </article>
     </div>
