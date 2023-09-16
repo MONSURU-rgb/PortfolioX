@@ -8,7 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
-import { useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { builder } from "@/api/builder";
 import { token } from "@/api/axios-config";
 

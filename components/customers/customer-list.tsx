@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { CustomerListPagination } from "./customer-list-pagination";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { builder } from "@/api/builder";
 
 function CustomerList() {

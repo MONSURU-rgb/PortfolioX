@@ -8,7 +8,8 @@ import { data1 } from "./data-for-table";
 import { builder } from "@/api/builder";
 import { token } from "@/api/axios-config";
 import { ClientList } from "../common/type";
-import { useQuery } from "react-query";
+
+import { useQuery } from "@tanstack/react-query";
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
 
 function CustomersListTable() {

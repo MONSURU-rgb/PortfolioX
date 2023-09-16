@@ -21,10 +21,9 @@ interface ModalType {
 export function ClientDetails() {
   const [counter, setCounter] = usePortal<ClientDetailsProps>(
     "key",
-    JSON.parse(cookieStorage.getItem("my-user") as string)
+    JSON.parse(cookieStorage.getItem("my-user") as string) ?? []
   );
-  const [openDrawer, { open: opened, close: closeDrawer }] =
-    useDisclosure(false);
+  const [openDrawer, { open, close }] = useDisclosure(false);
 
   return (
     <div className="flex gap-40 items-center">
@@ -51,10 +50,12 @@ export function ClientDetails() {
             <Image src="/arrow-down.png" alt="arrow down icon" fill></Image>
           </figure>
           <button className="min-[768px]:hidden">
-            <HamburgerButton onClick={opened} />
+            {/* <HamburgerButton onClick={open} /> */}
+
+            <p></p>
           </button>
         </section>
-        <DrawerContent opened={openDrawer} close={closeDrawer} />
+        <DrawerContent opened={openDrawer} close={close} />
       </div>
     </div>
   );
