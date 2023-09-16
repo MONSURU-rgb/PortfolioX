@@ -1,3 +1,4 @@
+"use client";
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
 import { Avatar, Burger, Indicator } from "@mantine/core";
 import Image from "next/image";
@@ -50,7 +51,7 @@ export function ClientDetails() {
           <figure className="relative w-20 h-20 aspect-square max-[768px]:hidden">
             <Image src="/arrow-down.png" alt="arrow down icon" fill></Image>
           </figure>
-          <button className="min-[768px]:hidden">
+          <button className="md:hidden">
             <span onClick={open}>menu</span>
             {/* <HamburgerButton onClick={open} /> */}
             {/* <Burger opened={opened} onClick={open} /> */}
