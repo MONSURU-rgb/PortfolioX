@@ -20,6 +20,9 @@ export function DrawerContent({ opened, close }: ModalType) {
         body: {
           height: "100%",
         },
+      }}
+      transitionProps={{
+        duration: 0,
       }}>
       <div className="flex justify-between min-h-[calc(100%-56px)] flex-col">
         <FirstSidebarList />

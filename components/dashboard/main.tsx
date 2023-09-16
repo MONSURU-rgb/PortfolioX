@@ -17,6 +17,7 @@ import {
 // import Donut from "./apex-donut";
 import DownArrow from "@/public/down-arrow";
 import CustomersListTable from "./customers-list-table";
+import { clsx } from "@mantine/core";
 // import Example from "./table";
 // import { DemoPie } from "./Doughnut";
 
@@ -63,6 +64,12 @@ const data = [
     color: "#56C456",
   },
 ];
+
+export interface TextWithDownArrowIconProps {
+  text: string;
+  color: string;
+  bg: string;
+}
 
 const CustomBar = (props: any) => {
   const { x, y, width, height, color } = props;
@@ -137,10 +144,7 @@ export function SecondChart({ text, size }: { text: string; size: number }) {
     <div className="flex-grow">
       <article className="flex justify-between items-center pb-24 overflow-x-auto w-full flex-grow max-[1120px]:!w-full">
         <h2 className="text-[var(--arsenic)] text-16 font-medium">{text}</h2>
-        <button className="text-[var(--grey)] text-12 flex rounded-[10px] p-2 gap-1 items-center">
-          <span className="text-[var(--grey)] text-12">Volume</span>
-          <DownArrow />
-        </button>
+        <TextWithDownArrowIcon text="Volume" color="#000" bg="#F8F5FF" />
       </article>
       <article className="flex flex-wrap justify-center">
         <Donut size={size} />
@@ -162,5 +166,24 @@ export function Main() {
         <CustomersListTable />
       </article>
     </main>
+  );
+}
+
+export function TextWithDownArrowIcon({
+  text,
+  color,
+  bg,
+}: TextWithDownArrowIconProps) {
+  return (
+    <button
+      className={clsx(
+        "text-12 flex rounded-[10px]",
+        "p-2 gap-1 items-center",
+        `text-[${color}]`,
+        `bg-[${bg}]`
+      )}>
+      <span className={clsx("text-12", `text-[${color}]`)}>{text}</span>
+      <DownArrow color={color} />
+    </button>
   );
 }
