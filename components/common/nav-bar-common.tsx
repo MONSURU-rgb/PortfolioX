@@ -30,7 +30,7 @@ export function NavBarCommon() {
   return (
     <div className="flex justify-between gap-40 bg-white pl-60 pt-22 pr-34 pb-24 sticky top-0 z-50">
       {mobileResponsive ? <Logo /> : <Search />}
-      <ThemeChanger />
+      {/* <ThemeChanger /> */}
       <ClientDetails />
     </div>
   );

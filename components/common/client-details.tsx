@@ -1,5 +1,5 @@
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
-import { Avatar, Indicator } from "@mantine/core";
+import { Avatar, Burger, Indicator } from "@mantine/core";
 import Image from "next/image";
 import React from "react";
 import { HamburgerButton } from "./hamburger";
@@ -19,6 +19,7 @@ interface ModalType {
 }
 
 export function ClientDetails() {
+  const [opened, { toggle }] = useDisclosure(false);
   const [counter, setCounter] = usePortal<ClientDetailsProps>(
     "key",
     JSON.parse(cookieStorage.getItem("my-user") as string) ?? []
@@ -50,9 +51,9 @@ export function ClientDetails() {
             <Image src="/arrow-down.png" alt="arrow down icon" fill></Image>
           </figure>
           <button className="min-[768px]:hidden">
+            <span onClick={open}>menu</span>
             {/* <HamburgerButton onClick={open} /> */}
-
-            <p></p>
+            {/* <Burger opened={opened} onClick={open} /> */}
           </button>
         </section>
         <DrawerContent opened={openDrawer} close={close} />
