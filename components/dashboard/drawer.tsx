@@ -22,7 +22,7 @@ export function DrawerContent({ opened, close }: ModalType) {
         },
       }}
       transitionProps={{
-        duration: 0,
+        transition: "slide-left",
       }}>
       <div className="flex justify-between min-h-[calc(100%-56px)] flex-col">
         <FirstSidebarList />
