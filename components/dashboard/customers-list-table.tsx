@@ -137,7 +137,7 @@ function CustomersListTable() {
           <tbody>
             {customerList?.map((item: any) => (
               <tr
-                key={item.name}
+                key={item?.name}
                 className="text-14 text-[#737B7B] hover:!bg-[#F8F5FF] !rounded-[10px]">
                 <td>
                   {item?.client_first_name} {item?.client_last_name}
@@ -151,7 +151,7 @@ function CustomersListTable() {
                   <ActionIcon />
                 </td>
                 <td>
-                  {item.status === true ? (
+                  {item?.status === true ? (
                     <span className="text-[#56C456] text-12 px-18 py-2 bg-[#F5FBF5]">
                       Active
                     </span>

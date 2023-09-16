@@ -53,7 +53,7 @@ interface IProgress {
 
 export function LoginForm() {
   const [loading, setLoading] = useState<boolean>(false);
-  const [authUser, setAuthUser] = usePortal.local<{}>("key", {});
+  const [authUser, setAuthUser] = usePortal.cookie<{}>("key", {});
 
   const { push } = useRouter();
   const form = useForm({
