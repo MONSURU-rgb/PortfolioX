@@ -52,8 +52,8 @@ export function ClientDetails() {
             <Image src="/arrow-down.png" alt="arrow down icon" fill></Image>
           </figure>
           <button className="md:hidden">
-            <span onClick={open}>menu</span>
-            {/* <HamburgerButton onClick={open} /> */}
+            {/* <span onClick={open}>menu</span> */}
+            <HamburgerButton onClick={open} />
             {/* <Burger opened={opened} onClick={open} /> */}
           </button>
         </section>

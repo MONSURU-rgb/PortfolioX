@@ -24,7 +24,7 @@ function CustomersListTable() {
   });
 
   const customerList = data?.data?.data;
-  console.log(data?.data?.data);
+  // console.log(data?.data?.data);
 
   const tester = JSON.parse(cookieStorage.getItem("my-user") as string);
 

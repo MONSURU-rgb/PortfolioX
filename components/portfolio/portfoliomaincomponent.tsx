@@ -8,9 +8,19 @@ import { TableHeader } from "../common/tableheader";
 import { FBRXIcon } from "../icons/fbrxIcon";
 import { CompleteStatusIcon } from "../icons/completeStatusIcon";
 import { PendingStatusIcon } from "../icons/pendingStatusIcon";
+import { builder } from "@/api/builder";
+import { useQuery } from "@tanstack/react-query";
 
 export function PortfolioMainComponent() {
   const [status, setStatus] = useState("completed");
+  const { data } = useQuery({
+    queryFn: async () => await builder.use().users.fetch(),
+    queryKey: builder.users.fetch.get(),
+  });
+
+  const customerList = data?.data?.data;
+  console.log(data?.data?.data);
+
   return (
     <>
       <div className="p-30 flex flex-wrap gap-30 max-[560px]:grid">
@@ -26,10 +36,10 @@ export function PortfolioMainComponent() {
         </div>
       </div>
 
-      <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30 max-[580px]:overflow-x-auto">
+      <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30">
         <TableHeader header="Portfolio History" button={null} />
 
-        <section>
+        <section className="max-[580px]:overflow-x-auto">
           <Table striped highlightOnHover verticalSpacing={16}>
             <thead>
               <tr
@@ -76,11 +86,12 @@ export function PortfolioMainComponent() {
                 <td>Jan 01,2022</td>
                 <td>$2,000.00</td>
                 <td>
-                  <Flex>
+                  <Flex gap={8} align="center">
                     {status === "completed" ? <CompleteStatusIcon /> : null}
                     {status === "completed" ? "Completed" : null}
 
                     {/* status === "pending" ? <PendingStatusIcon /> : onHoldIcon */}
+                    {/*  status === "pending" ? "Pending" : "On Hold"*/}
                   </Flex>
                 </td>
               </tr>
