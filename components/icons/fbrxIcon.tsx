@@ -6,7 +6,7 @@ export function FBRXIcon() {
       viewBox="0 0 36 36"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <circle cx="18" cy="18" r="18" fill="#33B938" fill-opacity="0.1" />
+      <circle cx="18" cy="18" r="18" fill="#33B938" fillOpacity="0.1" />
       <path
         d="M24.875 21.8125V23.875H11.125V21.8125C11.125 21.4344 11.4344 21.125 11.8125 21.125H24.1875C24.5656 21.125 24.875 21.4344 24.875 21.8125Z"
         fill="#33B938"

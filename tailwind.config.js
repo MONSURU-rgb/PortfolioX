@@ -46,7 +46,7 @@ module.exports = {
         28: "clamp(18px,1.6vw,28px)",
         88: "clamp(10px,5vw,88px)",
         45: "clamp(30px,2.8vw,45px)",
-        200: "clamp(140px,13vw,200px)",
+        200: "clamp(170px,15vw,220px)",
       },
 
       fontSize: {

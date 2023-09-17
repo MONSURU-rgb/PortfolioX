@@ -23,7 +23,8 @@
     "**/*.ts",
     "**/*.tsx",
     "components/add-client",
-    "components/add-client"
+    "components/add-client",
+    "pages/portfolios"
   ],
   "exclude": ["node_modules"]
 }

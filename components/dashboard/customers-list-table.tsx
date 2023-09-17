@@ -12,6 +12,7 @@ import { ClientList } from "../common/type";
 import { useQuery } from "@tanstack/react-query";
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
 import { GenerateReportButton, TableHeader } from "../common/tableheader";
+import Link from "next/link";
 
 function CustomersListTable() {
   const [value, setValue] = useState<Date | null>(null);
@@ -24,7 +25,14 @@ function CustomersListTable() {
   });
 
   const customerList = data?.data?.data;
-  // console.log(data?.data?.data);
+  console.log(data?.data?.data);
+
+  const [clientData, setClientData] = usePortal(
+    "client details",
+    cookieStorage.setItem("client", JSON.stringify(customerList))
+  );
+
+  console.log(clientData);
 
   const tester = JSON.parse(cookieStorage.getItem("my-user") as string);
 
@@ -46,7 +54,7 @@ function CustomersListTable() {
           <tbody>
             {customerList?.map((item: any) => (
               <tr
-                key={item?.name}
+                key={item?.client_first_name}
                 className="text-14 text-[#737B7B] hover:!bg-[#F8F5FF] !rounded-[10px]">
                 <td>
                   {item?.client_first_name} {item?.client_last_name}
@@ -57,7 +65,10 @@ function CustomersListTable() {
                   {tester?.first_name} {tester?.last_name}
                 </td>
                 <td>
-                  <ActionIcon />
+                  {" "}
+                  <Link href={`/dashboard/${item?.client_industry?.id}`}>
+                    <ActionIcon />
+                  </Link>
                 </td>
                 <td>
                   {item?.status === true ? (

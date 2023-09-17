@@ -1,5 +1,11 @@
 import { builder } from "@/api/builder";
-import { Box, PasswordInput, Select, TextInput } from "@mantine/core";
+import {
+  Box,
+  NumberInput,
+  PasswordInput,
+  Select,
+  TextInput,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useMutation } from "@tanstack/react-query";
 import Link from "next/link";
@@ -93,6 +99,7 @@ export function MainContentSection() {
         onSubmit={form.onSubmit((values) => {
           mutate(values);
           console.log(values);
+          form.reset();
         })}
         className="flex flex-col gap-24 w-[clamp(240px,45vw,650px)] pt-30">
         {" "}
@@ -182,7 +189,7 @@ export function MainContentSection() {
           {...form.getInputProps("client_email")}
         />
         <article className="flex gap-24 flex-wrap">
-          <TextInput
+          <NumberInput
             type="text"
             label="Total Investment"
             placeholder="Enter your investment"

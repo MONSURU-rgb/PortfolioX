@@ -16,7 +16,7 @@ function CustomerList() {
       <div className="py-40 px-34 flex gap-x-28 gap-y-30 flex-wrap justify-center">
         {customerList?.map((item?: any) => (
           <div
-            className="pt-22 pl-20 pb-28 pr-30 bg-white flex flex-col gap-16 w-200 rounded-[10px] basis-[23.4%]"
+            className="pt-22 pl-20 pb-28 pr-30 bg-white flex flex-col gap-16 w-200 rounded-[10px] max-[403px]:flex-grow"
             key={item?.name}>
             <section className="flex gap-12 items-center justify-between">
               <figure className="relative w-44 h-44 rounded-full">

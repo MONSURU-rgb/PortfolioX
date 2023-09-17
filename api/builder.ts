@@ -21,11 +21,13 @@ export const builder = createBuilder({
     fetch: () => APIInstance.get("/client/client_list"),
     create: (data: AddClientDetails) =>
       APIInstance.post<AddClientDetails>(
-        "/client/create_client_portfolio",
+        "/client/create_client_portfolio/",
         data
       ),
+    fetch_id: (id: string) => APIInstance.get(`/client/client_list/${id}`),
 
     porfolio_list: () => JsonServer.get("/portfolio"),
+    porfolio_transaction_list: () => JsonServer.get("/transaction_history"),
     // My details api is expecting an id argument ,this is how we intaporlate your endpoint
   },
 });
