@@ -8,18 +8,26 @@ import { TableHeader } from "../common/tableheader";
 import { FBRXIcon } from "../icons/fbrxIcon";
 import { CompleteStatusIcon } from "../icons/completeStatusIcon";
 import { PendingStatusIcon } from "../icons/pendingStatusIcon";
+import { OnHoldIcon } from "../icons/onHoldIcon";
 import { builder } from "@/api/builder";
 import { useQuery } from "@tanstack/react-query";
+
+export interface JsonServerProps {
+  id: number;
+  title: string;
+  date: string;
+  amount: string;
+  status: string;
+}
 
 export function PortfolioMainComponent() {
   const [status, setStatus] = useState("completed");
   const { data } = useQuery({
-    queryFn: async () => await builder.use().users.fetch(),
-    queryKey: builder.users.fetch.get(),
+    queryFn: async () => await builder.use().users.porfolio_list(),
+    queryKey: builder.users.porfolio_list.get(),
   });
-
-  const customerList = data?.data?.data;
-  console.log(data?.data?.data);
+  const clientPortfolio = data?.data;
+  console.log(clientPortfolio);
 
   return (
     <>
@@ -75,26 +83,45 @@ export function PortfolioMainComponent() {
               </tr>
             </thead>
 
-            <tbody>
-              <tr className="text-[#1A202C]">
-                <td>
-                  <Flex gap={10} justify="start" align="center">
-                    <FBRXIcon />
-                    <Text>FBRX/NASDAQ</Text>
-                  </Flex>
-                </td>
-                <td>Jan 01,2022</td>
-                <td>$2,000.00</td>
-                <td>
-                  <Flex gap={8} align="center">
-                    {status === "completed" ? <CompleteStatusIcon /> : null}
-                    {status === "completed" ? "Completed" : null}
+            {/* const drawerContent = clientPortfolio.find((item) => item.id == id); 
+              const {mutate } = useMutation({
+              mutationKey: ["status"],
+              mutationFn: async (value) => axios.patch(url, value)
+              })
+            */}
 
-                    {/* status === "pending" ? <PendingStatusIcon /> : onHoldIcon */}
-                    {/*  status === "pending" ? "Pending" : "On Hold"*/}
-                  </Flex>
-                </td>
-              </tr>
+            <tbody>
+              {clientPortfolio?.map(
+                ({ id, title, date, amount, status }: JsonServerProps) => (
+                  <tr
+                    className="text-[#1A202C] text-14 font-semibold"
+                    key={id}
+                    onClick={(id) => console.log(id)}>
+                    <td>
+                      <Flex gap={10} justify="start" align="center">
+                        <FBRXIcon />
+                        <Text>{title}</Text>
+                      </Flex>
+                    </td>
+                    <td>{date}</td>
+                    <td>{amount}</td>
+                    {/* <td>{status}</td> */}
+
+                    <td>
+                      <Flex gap={8} align="center">
+                        {status === "Completed" ? (
+                          <CompleteStatusIcon />
+                        ) : status === "Pending" ? (
+                          <PendingStatusIcon />
+                        ) : (
+                          <OnHoldIcon />
+                        )}
+                        {status}
+                      </Flex>
+                    </td>
+                  </tr>
+                )
+              )}
             </tbody>
           </Table>
         </section>

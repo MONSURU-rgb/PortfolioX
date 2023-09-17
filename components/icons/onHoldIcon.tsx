@@ -1,4 +1,4 @@
-export function onHoldIcon() {
+export function OnHoldIcon() {
   return (
     <svg
       width="16"

@@ -1,6 +1,7 @@
 import { createBuilder } from "@ibnlanre/portal";
-import { API, APIInstance } from "./axios-config";
+import { API, APIInstance, JsonServer } from "./axios-config";
 import { LoggedInUserProps } from "@/components/login/login-form";
+import { AddClientDetails } from "@/components/add-client/main-content-section";
 
 export interface LoginData {
   email: string;
@@ -18,6 +19,13 @@ export const builder = createBuilder({
   },
   users: {
     fetch: () => APIInstance.get("/client/client_list"),
+    create: (data: AddClientDetails) =>
+      APIInstance.post<AddClientDetails>(
+        "/client/create_client_portfolio",
+        data
+      ),
+
+    porfolio_list: () => JsonServer.get("/portfolio"),
     // My details api is expecting an id argument ,this is how we intaporlate your endpoint
   },
 });

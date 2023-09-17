@@ -1,0 +1,91 @@
+{
+  "portfolio": [
+    {
+      "id": 1,
+      "title": "FBRX/NASDAQ",
+      "date": "Jan 01,2022",
+      "amount": "$2,000.00",
+      "status": "Pending"
+    },
+    {
+      "id": 2,
+      "title": "Paypal/NASDAQ",
+      "date": "Jan 04,2022",
+      "amount": "$2,000.00",
+      "status": "Completed"
+    },
+    {
+      "id": 3,
+      "title": "Alphabet Inc.",
+      "date": "Jan 06,2022",
+      "amount": "$2,000.00",
+      "status": "On Hold"
+    },
+    {
+      "id": 4,
+      "title": "WellsFargo",
+      "date": "Jan 01,2022",
+      "amount": "$2,000.00",
+      "status": "completed"
+    },
+    {
+      "id": 5,
+      "title": "Paypal/NASDAQ",
+      "date": "Jan 04,2022",
+      "amount": "$2,000.00",
+      "status": "Pending"
+    },
+    {
+      "id": 6,
+      "title": "vvvv",
+      "date": "Jan 06,2022",
+      "amount": "$2,000.00",
+      "status": "On hold"
+    }
+  ],
+
+  "transaction_history": [
+    {
+      "id": 1,
+      "title": "Gionin Pau",
+      "date": "Jan 18,2022",
+      "amount": "$1,100.00",
+      "status": "Completed"
+    },
+    {
+      "id": 2,
+      "title": "Luo Chris",
+      "date": "Jan 16,2022",
+      "amount": "$950.00",
+      "status": "Pending"
+    },
+    {
+      "id": 3,
+      "title": "Mary Bloong",
+      "date": "Jan 07,2022",
+      "amount": "$2,000.00",
+      "status": "Completed"
+    },
+    {
+      "id": 4,
+      "title": "James Klow",
+      "date": "Jan 06,2022",
+      "amount": "$2,300.00",
+      "status": "On Hold"
+    },
+    {
+      "id": 5,
+      "title": "Medina Forde",
+      "date": "Jan 03,2022",
+      "amount": "$2,700.00",
+      "status": "Completed"
+    },
+    {
+      "id": 6,
+      "title": "Jammi Lespa",
+      "date": "Jan 03,2022",
+      "amount": "$5,200.00",
+      "status": "Pending"
+    }
+  ]
+}

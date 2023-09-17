@@ -8,62 +8,84 @@ import React from "react";
 import { toast } from "react-toastify";
 // import { TextInputComponent } from "../common/textInput";
 
-interface AddClientDetails {
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  security_question: string;
-  security_answer: string;
+export interface AddClientDetails {
+  client_first_name: string;
+  client_last_name: string;
+  client_email: string;
+  total_investment: number;
+  client_security_question: string;
+  client_security_answer: string;
+  client_gender: string;
+  client_industry: { industry_name: string; industry_description: string };
 }
 
 export function MainContentSection() {
   const { push } = useRouter();
+
+  const form = useForm({
+    initialValues: {
+      client_first_name: "",
+      client_last_name: "",
+      client_email: "",
+      total_investment: 0,
+      client_security_question: "",
+      client_security_answer: "",
+      client_gender: "",
+      client_industry: { industry_name: "", industry_description: "" },
+    },
+
+    validate: (values: AddClientDetails) => ({
+      client_first_name: values.client_first_name.match(/^[a-zA-Z]/)
+        ? null
+        : "Enter your first name",
+      client_last_name: values.client_last_name.match(/^[a-zA-Z]/gi)
+        ? null
+        : "Enter your last name",
+      client_email: values.client_email.match(/^\S+@email\.com$/)
+        ? null
+        : "Invalid email",
+      total_investment:
+        values.total_investment > 8
+          ? null
+          : "Total investment must be greater than zero",
+      client_security_question: values.client_security_question.match(
+        /^(Mother|Unique)$/i
+      )
+        ? null
+        : "please select the right response",
+      client_security_answer: values.client_security_answer.match(/^[a-zA-Z]/)
+        ? null
+        : "Invalid Answer",
+      client_gender: values.client_gender.match(/^(male|female)$/i)
+        ? null
+        : "Please a valid gender",
+      industry_name: values.client_industry.industry_name.match(/^[a-zA-Z]/)
+        ? null
+        : "Please enter a valid industry name",
+      industry_description: values.client_industry.industry_description.match(
+        /^[a-zA-Z]/
+      )
+        ? null
+        : "Enter your industry description",
+    }),
+  });
+
+  const values = form.values;
+  console.log(values);
+
   const { mutate } = useMutation({
     mutationFn: async (values: AddClientDetails) =>
-      await builder.use().account.api.sign_in(values),
-    mutationKey: builder.account.api.sign_in.get(),
+      await builder.use().users.create(values),
+    mutationKey: builder.users.create.get(),
     onSuccess: (values) => {
       console.log(values?.data);
-      toast.success("Logged in successfully!", {
+      toast.success("User created successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
       });
       push("/customer");
     },
   });
-  const form = useForm({
-    initialValues: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: "",
-      security_question: "",
-      security_answer: "",
-    },
-
-    validate: (values: AddClientDetails) => ({
-      first_name: values.first_name.match(/^[a-zA-Z]/)
-        ? null
-        : "Enter your first name",
-      last_name: values.last_name.match(/^[a-zA-Z]/gi)
-        ? null
-        : "Enter your last name",
-      email: values.email.match(/^\S+@email\.com$/) ? null : "Invalid email",
-      password:
-        values.password.length > 8
-          ? null
-          : "Password must contain eight characters including one uppercase letter, one lowercase letter, and one number or special character.",
-      security_question: values.security_question.match(/^[a-zA-Z ]*$/)
-        ? null
-        : "please select the right response",
-      answer: values.security_answer.match(/^[a-zA-Z]/)
-        ? null
-        : "Invalid Answer",
-    }),
-  });
-
-  const values = form.values;
 
   return (
     <div className="bg-[var(--light-bg)] grid place-content-center flex-grow">
@@ -101,7 +123,7 @@ export function MainContentSection() {
                 },
               },
             }}
-            {...form.getInputProps("first_name")}
+            {...form.getInputProps("client_first_name")}
           />
           <TextInput
             type="text"
@@ -129,7 +151,7 @@ export function MainContentSection() {
                 },
               },
             }}
-            {...form.getInputProps("last_name")}
+            {...form.getInputProps("client_last_name")}
           />
         </article>
         <TextInput
@@ -157,45 +179,130 @@ export function MainContentSection() {
               },
             },
           }}
-          {...form.getInputProps("email")}
+          {...form.getInputProps("client_email")}
         />
-        <PasswordInput
-          error={values.password}
-          label="Password"
-          placeholder="Enter password"
-          classNames={{
-            label: "text-[var(--violet)] text-20 font-semibold",
-            wrapper: "!py-2 rounded border border-[var(--violet)]",
-          }}
-          styles={{
-            root: {
-              display: "flex !important",
-              flexDirection: "column",
-              gap: "10px !important",
-              "&::error": {
-                border: "1px solid red !important",
+        <article className="flex gap-24 flex-wrap">
+          <TextInput
+            type="text"
+            label="Total Investment"
+            placeholder="Enter your investment"
+            classNames={{
+              label: "text-[var(--violet)] text-20 font-semibold",
+              wrapper: "!py-2  rounded border border-[var(--violet)]",
+            }}
+            styles={{
+              root: {
+                display: "flex !important",
+                flexDirection: "column",
+                gap: "10px !important",
+                flexGrow: 1,
               },
-            },
-            innerInput: {
-              color: "black !important",
-              background: "#f8f5ff !important",
-              "&::placeholder": {
+              input: {
                 color: "black !important",
+                background: "#f8f5ff !important",
+                "&::placeholder": {
+                  color: "black !important",
+                },
+                "&outlined": {
+                  outline: "none",
+                },
               },
-            },
-            wrapper: {
-              error: {
-                outline: "none !important",
+            }}
+            {...form.getInputProps("total_investment")}
+          />
+          <Select
+            label="Gender"
+            placeholder="Select gender"
+            data={[
+              { value: "male", label: "Male" },
+              { value: "female", label: "Female" },
+            ]}
+            // className="!w-1/2 !truncate text-[var(--violet)] text-20 font-semibold rounded"
+            classNames={{
+              label: "text-[var(--violet)] text-20 font-semibold",
+              wrapper: "!py-2  rounded border border-[var(--violet)]",
+            }}
+            styles={{
+              root: {
+                display: "flex !important",
+                flexDirection: "column",
+                gap: "10px !important",
+                borderRadius: "5px !important",
+                flexGrow: 1,
               },
-            },
-            error: {
-              wrapper: {
-                border: "1px solid red !important",
+              wrapper: { background: "#f8f5ff !important" },
+              input: {
+                color: "black !important",
+                height: "100% !important",
+                "&::placeholder": {
+                  color: "black !important",
+                },
+                "&outlined": {
+                  outline: "none",
+                },
               },
-            },
-          }}
-          {...form.getInputProps("password")}
-        />
+            }}
+            {...form.getInputProps("client_gender")}
+          />
+        </article>
+        <article className="flex gap-24 flex-wrap">
+          <TextInput
+            type="text"
+            label="Industry Name"
+            placeholder="Enter your industry name"
+            classNames={{
+              label: "text-[var(--violet)] text-20 font-semibold",
+              wrapper: "!py-2  rounded border border-[var(--violet)]",
+            }}
+            styles={{
+              root: {
+                display: "flex !important",
+                flexDirection: "column",
+                gap: "10px !important",
+                flexGrow: 1,
+              },
+              input: {
+                color: "black !important",
+                background: "#f8f5ff !important",
+                "&::placeholder": {
+                  color: "black !important",
+                },
+                "&outlined": {
+                  outline: "none",
+                },
+              },
+            }}
+            {...form.getInputProps("client_industry.industry_name")}
+          />
+          <TextInput
+            type="text"
+            label="Industry Description"
+            placeholder="Enter your industry description"
+            classNames={{
+              label: "text-[var(--violet)] text-20 font-semibold",
+              wrapper: "!py-2  rounded border border-[var(--violet)]",
+            }}
+            styles={{
+              root: {
+                display: "flex !important",
+                flexDirection: "column",
+                gap: "10px !important",
+                flexGrow: 1,
+              },
+              input: {
+                color: "black !important",
+                background: "#f8f5ff !important",
+                "&::placeholder": {
+                  color: "black !important",
+                },
+                "&outlined": {
+                  outline: "none",
+                },
+              },
+            }}
+            {...form.getInputProps("client_industry.industry_description")}
+          />
+        </article>
         <article className="flex w-full gap-24 flex-wrap">
           <Select
             label="Security Question"
@@ -229,7 +336,7 @@ export function MainContentSection() {
                 },
               },
             }}
-            {...form.getInputProps("security_question")}
+            {...form.getInputProps("client_security_question")}
           />
           <TextInput
             type="text"
@@ -257,7 +364,7 @@ export function MainContentSection() {
                 },
               },
             }}
-            {...form.getInputProps("security_answer")}
+            {...form.getInputProps("client_security_answer")}
           />
         </article>
         <button
