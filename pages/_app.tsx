@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Dispatch, SetStateAction } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "next-themes";
+import { theme } from "@/utils";
 
 interface IAuthUser {
   first_name?: string;
@@ -27,7 +28,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     // <PortalProvider>
     <ThemeProvider attribute="class" enableSystem={false} enableColorScheme>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
+      <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
         <QueryClientProvider client={queryClient}>
           <ToastContainer />
           <Component {...pageProps} />

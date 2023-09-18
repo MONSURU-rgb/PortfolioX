@@ -92,19 +92,16 @@
 //         localStorage.getItem("my-user") !== null
 //           ? JSON.parse(localStorage.getItem("my-user") as string).token
 //           : null;
-//       console.log(token);
 
 //       try {
 //         const response = await fetch(url.href, {
 //           headers: { Authorization: `Bearer ${token}` },
 //         });
 //         const json = (await response.json()) as UserApiResponse;
-//         console.log(json);
 //         setData(json.data);
 //         setRowCount(json.meta.totalRowCount);
 //       } catch (error) {
 //         setIsError(true);
-//         console.error(error);
 //         return;
 //       }
 //       setIsError(false);

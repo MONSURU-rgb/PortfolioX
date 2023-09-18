@@ -84,15 +84,12 @@ export function LoginForm() {
   //   }
   // });
 
-  // console.log(data);
-
   const { mutate } = useMutation({
     mutationFn: async (values: LogIn) =>
       await builder.use().account.api.sign_in(values),
     mutationKey: builder.account.api.sign_in.get(),
     onSuccess: (values) => {
       cookieStorage.setItem("my-user", JSON.stringify(values?.data));
-      console.log(values?.data);
       toast.success("Logged in successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,

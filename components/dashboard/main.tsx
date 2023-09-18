@@ -84,7 +84,7 @@ const CustomBar = (props: any) => {
         width={width}
         height={height}
         fill={color}
-        rx={`${topLeftRadius} ${topRightRadius}`} // Set separate radius for top left and top right corners
+        rx={`${topLeftRadius}`} // Set separate radius for top left and top right corners
         ry="0"
       />
     </g>

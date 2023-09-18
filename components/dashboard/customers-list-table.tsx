@@ -1,14 +1,7 @@
 import React, { useState } from "react";
-import { DateInput } from "@mantine/dates";
-import { CalendarMonth } from "./data-icon";
-import { Button, Popover, Table } from "@mantine/core";
-import { ArrowDropDown } from "./drop-down";
+import { Flex, Skeleton, Table } from "@mantine/core";
 import ActionIcon from "./action-icon";
-import { data1 } from "./data-for-table";
 import { builder } from "@/api/builder";
-import { token } from "@/api/axios-config";
-import { ClientList } from "../common/type";
-
 import { useQuery } from "@tanstack/react-query";
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
 import { GenerateReportButton, TableHeader } from "../common/tableheader";
@@ -19,25 +12,50 @@ function CustomersListTable() {
   const [placeholderValue, setPlaceholderValue] = useState("Last Week");
   const test = "Active";
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: async () => await builder.use().users.fetch(),
     queryKey: builder.users.fetch.get(),
+    onSuccess: () => {
+      cookieStorage.setItem("client_list", JSON.stringify(data?.data?.data));
+    },
   });
 
   const customerList = data?.data?.data;
-  console.log(data?.data?.data);
-
-  const [clientData, setClientData] = usePortal(
-    "client details",
-    cookieStorage.setItem("client", JSON.stringify(customerList))
-  );
-
-  console.log(clientData);
 
   const tester = JSON.parse(cookieStorage.getItem("my-user") as string);
 
   return (
     <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30 max-[580px]:overflow-x-auto">
+      {isLoading && (
+        <>
+          <Flex direction="row" gap={40} className="w-full">
+            <Skeleton height={50} mb="xl" visible={isLoading} width="30%" />
+            <Skeleton height={50} mb="xl" visible={isLoading} width="30%" />
+            <Skeleton height={50} mb="xl" visible={isLoading} width="30%" />
+          </Flex>
+          <Skeleton height={50} mb="xl" visible={isLoading} />
+          <Skeleton height={40} radius="xl" visible={isLoading} />
+          <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+          <Skeleton
+            height={40}
+            mt={6}
+            width="90%"
+            radius="xl"
+            visible={isLoading}
+          />
+
+          <Skeleton height={50} circle mb="xl" visible={isLoading} />
+          <Skeleton height={40} radius="xl" visible={isLoading} />
+          <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+          <Skeleton
+            height={40}
+            mt={6}
+            width="90%"
+            radius="xl"
+            visible={isLoading}
+          />
+        </>
+      )}
       <TableHeader header="Customers List" button={<GenerateReportButton />} />
       <section className="max-[580px]:overflow-x-auto">
         <Table striped highlightOnHover verticalSpacing={16}>

@@ -9,10 +9,11 @@ import { ClientDetails } from "../common/client-details";
 import { GreatBritainIcon } from "../icons/greatBritainIcon";
 import { Flex, Text } from "@mantine/core";
 import { DashboardIndividualClientDetails } from "./dashboardIndividualClientDetails";
+import { cookieStorage } from "@ibnlanre/portal";
 
 export function DashboardIndividual() {
   const { query } = useRouter();
-  console.log(query);
+
   return (
     <div className="flex">
       <Sidebar />
@@ -23,19 +24,22 @@ export function DashboardIndividual() {
 
 function DashboardIndividualMainPage() {
   const { query } = useRouter();
-  console.log(query);
   const { data } = useQuery({
     queryFn: async () => await builder.use().users.fetch(),
     queryKey: builder.users.fetch.get(),
   });
 
+  //   const results = JSON.parse(cookieStorage.getItem("client_list") as string);
+
   const result = data?.data?.data
     ?.map((data: any) => data)
-    .filter((data: any) => data.client_industry?.id == query.id);
+    ?.filter((data: any) => data.client_industry?.id == query.id);
 
-  const name = `${result[0]?.client_first_name} ${result[0]?.client_last_name}`;
+  let name = "";
 
-  console.log(result[0]?.client_first_name);
+  if (result) {
+    name = `${result[0]?.client_first_name} ${result[0]?.client_last_name}`;
+  }
   return (
     <main className="ml-260 !w-full bg-[#F8F5FF] flex flex-col min-h-screen max-[768px]:!ml-0">
       <NavBarCommon />

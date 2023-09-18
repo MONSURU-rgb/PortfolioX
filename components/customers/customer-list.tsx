@@ -10,7 +10,6 @@ function CustomerList() {
     queryKey: builder.users.fetch.get(),
   });
   const customerList = data?.data?.data;
-  console.log(data?.data?.data);
   return (
     <>
       <div className="py-40 px-34 flex gap-x-28 gap-y-30 flex-wrap justify-center">

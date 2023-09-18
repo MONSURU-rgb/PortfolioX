@@ -2,7 +2,7 @@
   "portfolio": [
     {
       "id": 1,
-      "title": "FBRX/NASDAQ",
+      "title": "MonsuruAfolabi",
       "date": "Jan 01,2022",
       "amount": "$2,000.00",
       "status": "Pending"
@@ -43,7 +43,6 @@
       "status": "On hold"
     }
   ],
-
   "transaction_history": [
     {
       "id": 1,

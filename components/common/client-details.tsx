@@ -2,7 +2,7 @@
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
 import { Avatar, Burger, Indicator } from "@mantine/core";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HamburgerButton } from "./hamburger";
 import { useDisclosure } from "@mantine/hooks";
 import { DrawerContent } from "../dashboard/drawer";
@@ -20,12 +20,12 @@ interface ModalType {
 }
 
 export function ClientDetails() {
-  const [opened, { toggle }] = useDisclosure(false);
-  const [counter, setCounter] = usePortal<ClientDetailsProps>(
-    "key",
-    JSON.parse(cookieStorage.getItem("my-user") as string) ?? []
-  );
   const [openDrawer, { open, close }] = useDisclosure(false);
+  const [counter, setCounter] = useState<ClientDetailsProps>();
+  useEffect(() => {
+    const myUser = cookieStorage.getItem("my-user");
+    setCounter(JSON.parse(myUser as string));
+  }, []);
 
   return (
     <div className="flex gap-40 items-center">

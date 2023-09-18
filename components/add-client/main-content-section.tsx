@@ -6,13 +6,14 @@ import {
   Select,
   TextInput,
 } from "@mantine/core";
-import { useForm } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
-import Link from "next/link";
-import router, { useRouter } from "next/router";
-import React from "react";
+
+import { useMutation, useQuery } from "@tanstack/react-query";
+
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-// import { TextInputComponent } from "../common/textInput";
+import * as Yup from "yup";
+import { useForm, yupResolver } from "@mantine/form";
 
 export interface AddClientDetails {
   client_first_name: string;
@@ -28,7 +29,65 @@ export interface AddClientDetails {
 export function MainContentSection() {
   const { push } = useRouter();
 
+  const [industryName, setIndustryName] = useState();
+
+  const { data } = useQuery({
+    queryFn: () => builder.use().users.industry_list(),
+    queryKey: builder.users.industry_list.get(),
+  });
+
+  const industryData = data?.data?.data;
+  let industry_name = [];
+
+  let industry_description = [];
+
+  if (industryData) {
+    industry_name = data?.data?.data?.map((data: any) => {
+      return { value: data?.industry_name, label: data?.industry_name };
+    });
+    industry_description = data?.data?.data?.map((data: any) => {
+      return {
+        value: data?.industry_description,
+        label: data?.industry_description,
+      };
+    });
+  }
+
+  const schema = Yup.object().shape({
+    client_first_name: Yup.string().min(
+      4,
+      "First Name should have at least 2 letters"
+    ),
+    client_last_name: Yup.string().min(
+      4,
+      "Last Name should have at least 2 letters"
+    ),
+    client_email: Yup.string().email("Invalid email"),
+    total_investment: Yup.number().min(
+      1,
+      " Your total investment should not be zero"
+    ),
+
+    client_security_question: Yup.string().min(4, "Choose a security question"),
+
+    client_security_answer: Yup.string().min(
+      4,
+      "Please enter a security answer greater than 4 characters"
+    ),
+
+    client_gender: Yup.string().min(4, "Please select your gender"),
+
+    client_industry: Yup.object().shape({
+      industry_name: Yup.string().min(2, "The industry name cannot be empty"),
+      industry_description: Yup.string().min(
+        2,
+        "The industry description should have at least 2 letters"
+      ),
+    }),
+  });
+
   const form = useForm({
+    validate: yupResolver(schema),
     initialValues: {
       client_first_name: "",
       client_last_name: "",
@@ -40,51 +99,49 @@ export function MainContentSection() {
       client_industry: { industry_name: "", industry_description: "" },
     },
 
-    validate: (values: AddClientDetails) => ({
-      client_first_name: values.client_first_name.match(/^[a-zA-Z]/)
-        ? null
-        : "Enter your first name",
-      client_last_name: values.client_last_name.match(/^[a-zA-Z]/gi)
-        ? null
-        : "Enter your last name",
-      client_email: values.client_email.match(/^\S+@email\.com$/)
-        ? null
-        : "Invalid email",
-      total_investment:
-        values.total_investment > 8
-          ? null
-          : "Total investment must be greater than zero",
-      client_security_question: values.client_security_question.match(
-        /^(Mother|Unique)$/i
-      )
-        ? null
-        : "please select the right response",
-      client_security_answer: values.client_security_answer.match(/^[a-zA-Z]/)
-        ? null
-        : "Invalid Answer",
-      client_gender: values.client_gender.match(/^(male|female)$/i)
-        ? null
-        : "Please a valid gender",
-      industry_name: values.client_industry.industry_name.match(/^[a-zA-Z]/)
-        ? null
-        : "Please enter a valid industry name",
-      industry_description: values.client_industry.industry_description.match(
-        /^[a-zA-Z]/
-      )
-        ? null
-        : "Enter your industry description",
-    }),
+    // validate: (values: AddClientDetails) => ({
+    //   client_first_name: values.client_first_name.match(/^[a-zA-Z]/)
+    //     ? null
+    //     : "Enter your first name",
+    //   client_last_name: values.client_last_name.match(/^[a-zA-Z]/gi)
+    //     ? null
+    //     : "Enter your last name",
+    //   client_email: values.client_email.match(/^\S+@email\.com$/)
+    //     ? null
+    //     : "Invalid email",
+    //   total_investment:
+    //     values.total_investment > 8
+    //       ? null
+    //       : "Total investment must be greater than zero",
+    //   client_security_question: values.client_security_question.match(
+    //     /^(Mother|Unique)$/i
+    //   )
+    //     ? null
+    //     : "please select the right response",
+    //   client_security_answer: values.client_security_answer.match(/^[a-zA-Z]/)
+    //     ? null
+    //     : "Invalid Answer",
+    //   client_gender: values.client_gender.match(/^(male|female)$/i)
+    //     ? null
+    //     : "Please a valid gender",
+    //   industry_name: values.client_industry.industry_name.match(/^[a-zA-Z]/)
+    //     ? null
+    //     : "Please enter a valid industry name",
+    //   industry_description: values.client_industry.industry_description.match(
+    //     /^[a-zA-Z]/
+    //   )
+    //     ? null
+    //     : "Enter your industry description",
+    // }),
   });
 
   const values = form.values;
-  console.log(values);
 
   const { mutate } = useMutation({
     mutationFn: async (values: AddClientDetails) =>
       await builder.use().users.create(values),
     mutationKey: builder.users.create.get(),
     onSuccess: (values) => {
-      console.log(values?.data);
       toast.success("User created successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
@@ -98,11 +155,9 @@ export function MainContentSection() {
       <form
         onSubmit={form.onSubmit((values) => {
           mutate(values);
-          console.log(values);
           form.reset();
         })}
         className="flex flex-col gap-24 w-[clamp(240px,45vw,650px)] pt-30">
-        {" "}
         <article className="flex gap-24 flex-wrap">
           <TextInput
             type="text"
@@ -253,10 +308,11 @@ export function MainContentSection() {
           />
         </article>
         <article className="flex gap-24 flex-wrap">
-          <TextInput
-            type="text"
-            label="Industry Name"
-            placeholder="Enter your industry name"
+          <Select
+            label="Industry Industry"
+            placeholder="Select industry name"
+            data={industry_name}
+            // className="!w-1/2 !truncate text-[var(--violet)] text-20 font-semibold rounded"
             classNames={{
               label: "text-[var(--violet)] text-20 font-semibold",
               wrapper: "!py-2  rounded border border-[var(--violet)]",
@@ -266,11 +322,13 @@ export function MainContentSection() {
                 display: "flex !important",
                 flexDirection: "column",
                 gap: "10px !important",
+                borderRadius: "5px !important",
                 flexGrow: 1,
               },
+              wrapper: { background: "#f8f5ff !important" },
               input: {
                 color: "black !important",
-                background: "#f8f5ff !important",
+                height: "100% !important",
                 "&::placeholder": {
                   color: "black !important",
                 },
@@ -281,10 +339,11 @@ export function MainContentSection() {
             }}
             {...form.getInputProps("client_industry.industry_name")}
           />
-          <TextInput
-            type="text"
+          <Select
             label="Industry Description"
-            placeholder="Enter your industry description"
+            placeholder="Select industry name"
+            data={industry_description}
+            // className="!w-1/2 !truncate text-[var(--violet)] text-20 font-semibold rounded"
             classNames={{
               label: "text-[var(--violet)] text-20 font-semibold",
               wrapper: "!py-2  rounded border border-[var(--violet)]",
@@ -294,11 +353,13 @@ export function MainContentSection() {
                 display: "flex !important",
                 flexDirection: "column",
                 gap: "10px !important",
+                borderRadius: "5px !important",
                 flexGrow: 1,
               },
+              wrapper: { background: "#f8f5ff !important" },
               input: {
                 color: "black !important",
-                background: "#f8f5ff !important",
+                height: "100% !important",
                 "&::placeholder": {
                   color: "black !important",
                 },

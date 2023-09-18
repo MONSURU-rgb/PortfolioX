@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { SecondChart, TextWithDownArrowIcon } from "../dashboard/main";
-import { Box, Divider, Flex, Grid, Group, Table, Text } from "@mantine/core";
+import {
+  Box,
+  Divider,
+  Flex,
+  Grid,
+  Group,
+  Modal,
+  Table,
+  Text,
+} from "@mantine/core";
 import { TopNewsIcon } from "@/public/topNewsIcon";
 import { NasdaqIcon } from "@/public/nasdaq";
 import { NasdaqDropDownIcon } from "@/public/nasdaqDropDown";
@@ -11,6 +20,8 @@ import { PendingStatusIcon } from "../icons/pendingStatusIcon";
 import { OnHoldIcon } from "../icons/onHoldIcon";
 import { builder } from "@/api/builder";
 import { useQuery } from "@tanstack/react-query";
+import { useDisclosure } from "@mantine/hooks";
+import { PortfolioModal } from "../modal/portfolioModal";
 
 export interface JsonServerProps {
   id: number;
@@ -20,14 +31,24 @@ export interface JsonServerProps {
   status: string;
 }
 
+// useQuery.invalidatequeries to refetch the data
+
 export function PortfolioMainComponent() {
   const [status, setStatus] = useState("completed");
+  const [opened, { open, close }] = useDisclosure(false);
   const { data } = useQuery({
     queryFn: async () => await builder.use().users.porfolio_list(),
     queryKey: builder.users.porfolio_list.get(),
   });
   const clientPortfolio = data?.data;
-  console.log(clientPortfolio);
+
+  const [modalProps, setModalProps] = useState<{
+    opened: boolean;
+    component: ReactNode;
+  }>({
+    opened: false,
+    component: null,
+  });
 
   return (
     <>
@@ -43,7 +64,6 @@ export function PortfolioMainComponent() {
           <TopNews />
         </div>
       </div>
-
       <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30">
         <TableHeader header="Portfolio History" button={null} />
 
@@ -83,6 +103,8 @@ export function PortfolioMainComponent() {
               </tr>
             </thead>
 
+            {/* Target how to set a modal based on the component */}
+
             {/* const drawerContent = clientPortfolio.find((item) => item.id == id); 
               const {mutate } = useMutation({
               mutationKey: ["status"],
@@ -91,40 +113,60 @@ export function PortfolioMainComponent() {
             */}
 
             <tbody>
-              {clientPortfolio?.map(
-                ({ id, title, date, amount, status }: JsonServerProps) => (
-                  <tr
-                    className="text-[#1A202C] text-14 font-semibold"
-                    key={id}
-                    onClick={(id) => console.log(id)}>
-                    <td>
-                      <Flex gap={10} justify="start" align="center">
-                        <FBRXIcon />
-                        <Text>{title}</Text>
-                      </Flex>
-                    </td>
-                    <td>{date}</td>
-                    <td>{amount}</td>
-                    {/* <td>{status}</td> */}
+              {clientPortfolio?.map((props: JsonServerProps) => (
+                <tr
+                  className="text-[#1A202C] text-14 font-semibold"
+                  key={props.id}
+                  onClick={() => {
+                    setModalProps({
+                      opened: true,
+                      component: <PortfolioModal {...props} />,
+                    });
+                  }}>
+                  <td>
+                    <Flex gap={10} justify="start" align="center">
+                      <FBRXIcon />
+                      <Text>{props.title}</Text>
+                    </Flex>
+                  </td>
+                  <td>
+                    {status !== "Completed" ? (
+                      <span onClick={open}>{props.date}</span>
+                    ) : (
+                      <span>{props.date}</span>
+                    )}
+                  </td>
 
-                    <td>
-                      <Flex gap={8} align="center">
-                        {status === "Completed" ? (
-                          <CompleteStatusIcon />
-                        ) : status === "Pending" ? (
-                          <PendingStatusIcon />
-                        ) : (
-                          <OnHoldIcon />
-                        )}
-                        {status}
-                      </Flex>
-                    </td>
-                  </tr>
-                )
-              )}
+                  <td>{props.amount}</td>
+
+                  <td>
+                    <Flex gap={8} align="center">
+                      {props.status === "Completed" ? (
+                        <CompleteStatusIcon />
+                      ) : props.status === "Pending" ? (
+                        <PendingStatusIcon />
+                      ) : (
+                        <OnHoldIcon />
+                      )}
+                      {props.status}
+                    </Flex>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </section>
+
+        <Modal
+          opened={modalProps.opened}
+          onClose={() => {
+            setModalProps({
+              opened: false,
+              component: null,
+            });
+          }}>
+          {modalProps.component}
+        </Modal>
       </div>
     </>
   );

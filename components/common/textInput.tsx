@@ -2,7 +2,6 @@ import { TextInput } from "@mantine/core";
 import React from "react";
 
 // export function TextInputComponent({ form }) {
-//   console.log(form.values);
 //   return (
 //     <TextInput
 //       type="email"
