@@ -29,7 +29,7 @@ export function PortfolioModal(props: JsonServerProps) {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 1000,
       });
-      //   queryClient.invalidateQueries(builder.users.portfolio_list_edit.get());
+      queryClient.invalidateQueries(builder.users.porfolio_list.get());
     },
   });
 

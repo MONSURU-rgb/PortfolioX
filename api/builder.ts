@@ -3,6 +3,7 @@ import { API, APIInstance, JsonServer } from "./axios-config";
 import { LoggedInUserProps } from "@/components/login/login-form";
 import { AddClientDetails } from "@/components/add-client/main-content-section";
 import { JsonServerProps } from "@/components/portfolio/portfoliomaincomponent";
+import { CreateIndustryModalProps } from "@/components/industries/industriesModal";
 
 export interface LoginData {
   email: string;
@@ -31,6 +32,9 @@ export const builder = createBuilder({
     porfolio_transaction_list: () => JsonServer.get("/transaction_history"),
     portfolio_list_edit: (data: JsonServerProps) =>
       JsonServer.patch(`/portfolio/${data.id}`, data),
+
+    post_industry_list: (data: CreateIndustryModalProps) =>
+      APIInstance.post("client/create_industry/", data),
     // My details api is expecting an id argument ,this is how we intaporlate your endpoint
   },
 });

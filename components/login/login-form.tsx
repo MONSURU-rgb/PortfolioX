@@ -2,15 +2,12 @@ import Link from "next/link";
 import React, { ComponentProps, Ref, useEffect, useState } from "react";
 import { Loader, PasswordInput, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-
-import { API } from "@/api/axios-config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/router";
 import { cookieStorage, usePortal } from "@ibnlanre/portal";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { builder } from "@/api/builder";
-import { token } from "@/api/axios-config";
 
 interface ButtonProps extends ComponentProps<"button"> {
   text?: string;
@@ -73,18 +70,7 @@ export function LoginForm() {
 
   const values = form.values;
 
-  // const { data, isLoading } = useQuery("key", async () => {
-  //   try {
-  //     const { data } = await API.get(
-  //       `https://jsonplaceholder.typicode.com/todos/1`
-  //     );
-  //     return data;
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // });
-
-  const { mutate } = useMutation({
+  const { mutate, isLoading } = useMutation({
     mutationFn: async (values: LogIn) =>
       await builder.use().account.api.sign_in(values),
     mutationKey: builder.account.api.sign_in.get(),
@@ -97,28 +83,6 @@ export function LoginForm() {
       push("/dashboard");
     },
   });
-
-  // const postData = async (values: IProgress) => {
-  //   setLoading(true);
-
-  //   try {
-  //     const response = await builder.use().account.api.sign_in(values);
-  //     if (response.data) {
-  //       response.data?.token && push("/dashboard");
-  //       cookieStorage.setItem("my-user", JSON.stringify(response.data));
-  //       setAuthUser(response.data);
-  //     }
-  //     setLoading(false);
-  //     toast.success("Logged in successfully!", {
-  //       position: toast.POSITION.TOP_RIGHT,
-  //     });
-  //   } catch (error) {
-  //     toast.error("Incorrect Credentials");
-  //     setLoading(false);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   return (
     <div className="min-[860px]:w-1/2 flex flex-col pt-56 gap-69 !justify-center h-[calc(100vh-88px)] overflow-clip">
@@ -207,7 +171,7 @@ export function LoginForm() {
               {...form.getInputProps("password")}
             />
           </section>
-          <Button loading={loading} type="submit" />
+          <Button loading={isLoading} type="submit" />
         </form>
 
         <Link

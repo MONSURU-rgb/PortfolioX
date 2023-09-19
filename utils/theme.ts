@@ -6,7 +6,7 @@ export const theme: MantineThemeOverride = {
   primaryColor: "blue",
 
   colors: {
-    grey: [],
+    grey: ["#ffffff", "#ffffff", "#ffffff"],
   },
   headings: {
     sizes: {
@@ -63,12 +63,30 @@ export const theme: MantineThemeOverride = {
 
     Button: {
       variants: {
-        white(themes) {
+        action(themes) {
           return {
             root: {
-              background: "#f8f8f8 !important",
-              color: "black !important",
+              background: "#000 !important",
               marginTop: "10px !important",
+              textDecoration: "uppercase",
+              textAlign: "center",
+              paddingBlock: "20px",
+              fontWeight: "bold",
+              borderRadius: "5px !important",
+              display: "flex",
+              gap: "20px",
+              justifyContent: "center",
+              alignItems: "center",
+              color: "white",
+              height: "fit-content",
+              //for your custom color to work while having padding block on your Button component, you have to set the height to fit-content.
+
+              "&:hover": {
+                opacity: "0.7",
+              },
+              "&disabled": {
+                opacity: "0.75",
+              },
             },
           };
         },
@@ -76,3 +94,7 @@ export const theme: MantineThemeOverride = {
     },
   },
 };
+
+//"uppercase text-white text-center text-20 font-bold rounded bg-[var(--violet)] py-20 hover:opacity-70 flex gap-4 justify-center items-center disabled:opacity-75"
+
+//To style a pseudoElement you have to append the amperand character in a string and input the styles in an object.

@@ -2,14 +2,14 @@
   "portfolio": [
     {
       "id": 1,
-      "title": "MonsuruAfolabi",
+      "title": "Mon",
       "date": "Jan 01,2022",
       "amount": "$2,000.00",
       "status": "Pending"
     },
     {
       "id": 2,
-      "title": "Paypal/NASDAQ",
+      "title": "Paypal",
       "date": "Jan 04,2022",
       "amount": "$2,000.00",
       "status": "Completed"
@@ -17,20 +17,20 @@
     {
       "id": 3,
       "title": "Alphabet Inc.",
-      "date": "Jan 06,2022",
+      "date": "Jan 06,20",
       "amount": "$2,000.00",
       "status": "On Hold"
     },
     {
       "id": 4,
-      "title": "WellsFargo",
+      "title": "Wells",
       "date": "Jan 01,2022",
       "amount": "$2,000.00",
       "status": "completed"
     },
     {
       "id": 5,
-      "title": "Paypal/NASDAQ",
+      "title": "Paypal/NASr",
       "date": "Jan 04,2022",
       "amount": "$2,000.00",
       "status": "Pending"
