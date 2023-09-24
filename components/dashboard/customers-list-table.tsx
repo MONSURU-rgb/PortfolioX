@@ -15,12 +15,13 @@ function CustomersListTable() {
   const { data, isLoading } = useQuery({
     queryFn: async () => await builder.use().users.fetch(),
     queryKey: builder.users.fetch.get(),
+    select: (data) => data?.data?.data,
     onSuccess: () => {
       cookieStorage.setItem("client_list", JSON.stringify(data?.data?.data));
     },
   });
 
-  const customerList = data?.data?.data;
+  const customerList = data;
 
   const tester = JSON.parse(cookieStorage.getItem("my-user") as string);
 
@@ -72,7 +73,7 @@ function CustomersListTable() {
           <tbody>
             {customerList?.map((item: any) => (
               <tr
-                key={item?.client_first_name}
+                key={item?.client_client_email}
                 className="text-14 text-[#737B7B] hover:!bg-[#F8F5FF] !rounded-[10px]">
                 <td>
                   {item?.client_first_name} {item?.client_last_name}

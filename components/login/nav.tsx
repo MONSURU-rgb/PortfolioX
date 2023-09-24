@@ -8,7 +8,7 @@ export function Nav() {
   return (
     <>
       <NavBar />
-      <div className="px-120 flex items-center pb-89 gap-128 z-10 justify-center">
+      <div className="px-120 flex items-center pb-89 gap-128 z-10 justify-center bg-white">
         <LoginReport />
         <LoginForm />
       </div>

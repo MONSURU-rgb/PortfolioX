@@ -4,6 +4,7 @@ import { useForm, yupResolver } from "@mantine/form";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { builder } from "@/api/builder";
 import { toast } from "react-toastify";
+import { Dispatch, SetStateAction } from "react";
 
 export interface CreateIndustryModalProps {
   id: number;
@@ -19,9 +20,11 @@ const schema = Yup.object().shape({
   ),
 });
 
-const queryClient = new QueryClient();
+//{setClose: Dispatch<SetStateAction<CreateIndustryModalProps>>;}
 
-export function IndustryModal() {
+export function IndustryModal({ setClose }) {
+  const queryClient = new QueryClient();
+
   const { mutate } = useMutation({
     mutationFn: (values: CreateIndustryModalProps) =>
       builder.use().users.post_industry_list(values),
@@ -49,6 +52,10 @@ export function IndustryModal() {
         mutate(values);
         console.log(values);
         industryForm.reset();
+        setClose({
+          opened: false,
+          component: null,
+        });
       })}>
       <Flex
         direction="column"
@@ -70,11 +77,7 @@ export function IndustryModal() {
           {...industryForm.getInputProps("industry_description")}
           variant="primary"
         />
-        <Button
-          variant="action"
-          type="submit"
-          onClick={close}
-          className="self-center">
+        <Button variant="action" type="submit" className="self-center">
           Create Industry
         </Button>
       </Flex>

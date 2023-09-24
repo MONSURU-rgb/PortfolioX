@@ -12,6 +12,8 @@ export interface TableDataProps {
   industry_description: string;
 }
 
+const pageCount: number = 10;
+
 export default function IndustryTable({
   industryList,
 }: {
@@ -20,8 +22,10 @@ export default function IndustryTable({
   const { table } = useCustomTable({
     tableData: industryList,
     columns: tableColumn,
+    pageCount: pageCount,
   });
 
+  console.log(table);
   return (
     <div className="p-30 bg-white rounded-[15px] h-full w-full">
       <BmsTable table={table} />

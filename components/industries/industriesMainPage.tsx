@@ -20,11 +20,9 @@ export function IndustriesMainPage() {
   const { data } = useQuery({
     queryFn: () => builder.use().users.industry_list(),
     queryKey: builder.users.industry_list.get(),
-    select: (data) => data?.data,
-    onSuccess: () => {
-      setIndustryList(data?.data);
-    },
+    select: (data) => data?.data?.data,
   });
+
   return (
     <Flex
       bg="#f8f5ff"
@@ -40,14 +38,12 @@ export function IndustriesMainPage() {
         onClick={() => {
           setCreateIndustryModal({
             opened: true,
-            component: <IndustryModal />,
+            component: <IndustryModal setClose={setCreateIndustryModal} />,
           });
         }}>
-        Create New Client
+        Create New Industry
       </Button>
-
-      <IndustryTable industryList={industryList} />
-
+      <IndustryTable industryList={data} />
       <Modal
         opened={createIndustryModal.opened}
         onClose={() => {

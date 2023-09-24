@@ -34,7 +34,6 @@ export function PortfolioModal(props: JsonServerProps) {
   });
 
   const values = form.values;
-  console.log(values);
   return (
     <form
       onSubmit={form.onSubmit((values) => {

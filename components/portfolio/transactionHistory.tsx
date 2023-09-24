@@ -28,8 +28,9 @@ function PortfolioTransactionHistory() {
   const { data, isLoading } = useQuery({
     queryFn: async () => await builder.use().users.porfolio_transaction_list(),
     queryKey: builder.users.porfolio_list.get(),
+    select: (data) => data?.data,
   });
-  const clientPortfolio = data?.data;
+  const clientPortfolio = data;
 
   // if (isLoading) return <TableSkeleton isLoading={isLoading} />;
   return (

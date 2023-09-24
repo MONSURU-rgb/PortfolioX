@@ -14,6 +14,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useForm, yupResolver } from "@mantine/form";
+import { BaseDemo } from "./imageUploadfile";
 
 export interface AddClientDetails {
   client_first_name: string;
@@ -34,18 +35,19 @@ export function MainContentSection() {
   const { data } = useQuery({
     queryFn: () => builder.use().users.industry_list(),
     queryKey: builder.users.industry_list.get(),
+    select: (data) => data?.data?.data,
   });
 
-  const industryData = data?.data?.data;
+  const industryData = data;
   let industry_name = [];
 
   let industry_description = [];
 
   if (industryData) {
-    industry_name = data?.data?.data?.map((data: any) => {
+    industry_name = data?.map((data: any) => {
       return { value: data?.industry_name, label: data?.industry_name };
     });
-    industry_description = data?.data?.data?.map((data: any) => {
+    industry_description = data?.map((data: any) => {
       return {
         value: data?.industry_description,
         label: data?.industry_description,
@@ -152,6 +154,7 @@ export function MainContentSection() {
 
   return (
     <div className="bg-[var(--light-bg)] grid place-content-center flex-grow">
+      {/* <BaseDemo /> */}
       <form
         onSubmit={form.onSubmit((values) => {
           mutate(values);
@@ -283,6 +286,7 @@ export function MainContentSection() {
             classNames={{
               label: "text-[var(--violet)] text-20 font-semibold",
               wrapper: "!py-2  rounded border border-[var(--violet)]",
+              input: "bg-[var(--light-bg)]",
             }}
             styles={{
               root: {
@@ -316,6 +320,7 @@ export function MainContentSection() {
             classNames={{
               label: "text-[var(--violet)] text-20 font-semibold",
               wrapper: "!py-2  rounded border border-[var(--violet)]",
+              input: "bg-[var(--light-bg)]",
             }}
             styles={{
               root: {
@@ -347,6 +352,7 @@ export function MainContentSection() {
             classNames={{
               label: "text-[var(--violet)] text-20 font-semibold",
               wrapper: "!py-2  rounded border border-[var(--violet)]",
+              input: "bg-[var(--light-bg)]",
             }}
             styles={{
               root: {
@@ -383,6 +389,7 @@ export function MainContentSection() {
             classNames={{
               label: "text-[var(--violet)] text-20 font-semibold",
               wrapper: "!py-2  rounded border border-[var(--violet)]",
+              input: "bg-[var(--light-bg)]",
             }}
             styles={{
               root: {

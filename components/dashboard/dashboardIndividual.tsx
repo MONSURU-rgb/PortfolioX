@@ -27,11 +27,12 @@ function DashboardIndividualMainPage() {
   const { data } = useQuery({
     queryFn: async () => await builder.use().users.fetch(),
     queryKey: builder.users.fetch.get(),
+    select: (data) => data?.data?.data,
   });
 
   //   const results = JSON.parse(cookieStorage.getItem("client_list") as string);
 
-  const result = data?.data?.data
+  const result = data
     ?.map((data: any) => data)
     ?.filter((data: any) => data.client_industry?.id == query.id);
 

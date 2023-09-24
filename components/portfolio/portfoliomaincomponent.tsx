@@ -39,8 +39,9 @@ export function PortfolioMainComponent() {
   const { data } = useQuery({
     queryFn: async () => await builder.use().users.porfolio_list(),
     queryKey: builder.users.porfolio_list.get(),
+    select: (data) => data?.data,
   });
-  const clientPortfolio = data?.data;
+  const clientPortfolio = data;
 
   const [modalProps, setModalProps] = useState<{
     opened: boolean;

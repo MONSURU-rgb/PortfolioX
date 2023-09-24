@@ -7,7 +7,7 @@ export function LoginReport() {
   return (
     <div className="grid gap-[70px] max-[860px]:hidden w-1/2">
       <div className="self-center">
-        <div className="flex flex-col gap-44 bg-[#FCFDFF] px-[50px]">
+        <div className="flex flex-col gap-44 bg-white px-[50px]">
           <section
             className="flex flex-col gap-20 w-fit pt-40 px-24 drop-shadow-lg"
             style={{ borderTop: "1px dashed #757575" }}>
