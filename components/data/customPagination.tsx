@@ -22,7 +22,7 @@ export const CustomTablePagination = ({
 }) => {
   const totalPage = useMemo(
     () => (totalItems ? Math.ceil(Number(totalItems) / pageSize) : 0),
-    [totalItems]
+    [totalItems, pageSize]
   );
 
   const handlePagination = ({

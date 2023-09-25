@@ -4,12 +4,17 @@ import { useForm, yupResolver } from "@mantine/form";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import { builder } from "@/api/builder";
 import { toast } from "react-toastify";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface CreateIndustryModalProps {
   id: number;
   industry_name: string;
   industry_description: string;
+}
+
+export interface ModalProps {
+  opened: boolean;
+  component: ReactNode | null;
 }
 
 const schema = Yup.object().shape({
@@ -22,7 +27,11 @@ const schema = Yup.object().shape({
 
 //{setClose: Dispatch<SetStateAction<CreateIndustryModalProps>>;}
 
-export function IndustryModal({ setClose }) {
+export function IndustryModal({
+  setClose,
+}: {
+  setClose: Dispatch<SetStateAction<ModalProps>>;
+}) {
   const queryClient = new QueryClient();
 
   const { mutate } = useMutation({
