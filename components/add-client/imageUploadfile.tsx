@@ -12,7 +12,7 @@ import Image from "next/image";
 export function BaseDemo(props: Partial<DropzoneProps>) {
   const [fileUpload, setFileUpload] = useState<FileWithPath | null>(null);
 
-  console.log(fileUpload);
+  // console.log(fileUpload);
 
   function formatBytes(bytes: any, decimals = 2) {
     if (bytes === 0) return "0 Bytes";
@@ -30,7 +30,7 @@ export function BaseDemo(props: Partial<DropzoneProps>) {
   const fileSizeInBytes = fileUpload?.size; // Replace with the actual file size
   const fileSizeFormatted = formatBytes(fileSizeInBytes);
 
-  console.log("File size:", fileSizeFormatted);
+  // console.log("File size:", fileSizeFormatted);
 
   const ImageUpload = async () => {
     let formData = new FormData();
@@ -40,7 +40,7 @@ export function BaseDemo(props: Partial<DropzoneProps>) {
     }
 
     formData.forEach((value, key) => {
-      console.log(key, value);
+      // console.log(key, value);
     });
   };
 
@@ -56,7 +56,7 @@ export function BaseDemo(props: Partial<DropzoneProps>) {
       }}
       //   onDrop={(files) => console.log("accepted files", files)}
       onDrop={(files) => setFileUpload(files[0])}
-      onReject={(files) => console.log("rejected files", files)}
+      // onReject={(files) => console.log("rejected files", files)}
       maxSize={3 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
       {...props}>

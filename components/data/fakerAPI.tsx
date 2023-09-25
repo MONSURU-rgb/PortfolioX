@@ -17,5 +17,5 @@ export const USERS = faker.helpers.multiple(createRandomUser, {
   count: 5,
 });
 
-console.log(createRandomUser());
-console.log("createRandomUser");
+// console.log(createRandomUser());
+// console.log("createRandomUser");

@@ -129,7 +129,7 @@ export function TableSkeleton({
   isLoading: boolean;
   children: ReactNode;
 }) {
-  console.log(isLoading);
+  // console.log(isLoading);
   return (
     <>
       {isLoading && (

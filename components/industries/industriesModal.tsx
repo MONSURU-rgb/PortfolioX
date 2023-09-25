@@ -54,12 +54,12 @@ export function IndustryModal({
   });
 
   const values = industryForm.values;
-  console.log(values);
+  // console.log(values);
   return (
     <form
       onSubmit={industryForm.onSubmit((values: CreateIndustryModalProps) => {
         mutate(values);
-        console.log(values);
+        // console.log(values);
         industryForm.reset();
         setClose({
           opened: false,

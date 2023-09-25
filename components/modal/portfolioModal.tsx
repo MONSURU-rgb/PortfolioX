@@ -24,7 +24,7 @@ export function PortfolioModal(props: JsonServerProps) {
       await builder.use().users.portfolio_list_edit(values),
     mutationKey: builder.users.portfolio_list_edit.get(),
     onSuccess: (values) => {
-      console.log(values?.data);
+      // console.log(values?.data);
       toast.success("User data updated successfully!", {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 1000,
@@ -38,7 +38,7 @@ export function PortfolioModal(props: JsonServerProps) {
     <form
       onSubmit={form.onSubmit((values) => {
         mutate(values);
-        console.log(values);
+        // console.log(values);
         form.reset();
       })}>
       <Flex direction="column" gap={15}>

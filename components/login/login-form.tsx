@@ -78,7 +78,7 @@ export function LoginForm() {
       cookieStorage.setItem("my-user", JSON.stringify(values?.data));
       toast.success("Logged in successfully!", {
         position: toast.POSITION.TOP_RIGHT,
-        autoClose: 3000,
+        autoClose: 1000,
       });
       push("/dashboard");
     },

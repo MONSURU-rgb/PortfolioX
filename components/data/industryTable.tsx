@@ -25,7 +25,7 @@ export default function IndustryTable({
     pageCount: pageCount,
   });
 
-  console.log(table);
+  // console.log(table);
   return (
     <div className="p-30 bg-white rounded-[15px] h-full w-full">
       <BmsTable table={table} />
