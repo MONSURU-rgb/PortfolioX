@@ -25,7 +25,7 @@ export function DrawerContent({ opened, close }: ModalType) {
       transitionProps={{
         transition: "slide-right",
       }}>
-      <div className="flex justify-between min-h-[calc(100%-56px)] flex-col">
+      <div className="flex justify-between min-h-[calc(100%-56px)] !h-full flex-col">
         <FirstSidebarList />
         <SecondSideBarList />
       </div>

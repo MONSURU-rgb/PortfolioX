@@ -30,10 +30,10 @@ export default function Donut({ size }: { size: number }) {
           </Text>
         }
         sections={[
-          { value: 40, color: "black", tooltip: "Documents – 40 Gb" },
-          { value: 25, color: "#FF805D", tooltip: "Apps – 25 Gb" },
-          { value: 20, color: "#FF9E2C", tooltip: "Other – 15 Gb" },
-          { value: 15, color: "#C3FF44", tooltip: "Other – 15 Gb" },
+          { value: 40, color: "black", tooltip: "Civil Service" },
+          { value: 25, color: "#FF805D", tooltip: "Service" },
+          { value: 20, color: "#FF9E2C", tooltip: "Trading" },
+          { value: 15, color: "#C3FF44", tooltip: "IT" },
         ]}
       />
     </Group>

@@ -29,7 +29,7 @@ export function SecondSideBarList() {
   const { push, asPath } = useRouter();
   const activeCheck = (link: string) => link === asPath;
   return (
-    <div className="px-[10px] flex flex-col gap-24 pb-88">
+    <div className="px-[10px] flex flex-col gap-24">
       <span
         className={`flex gap-18 w-full pl-18 items-center rounded cursor-pointer ${
           activeCheck(listItem[0].path)

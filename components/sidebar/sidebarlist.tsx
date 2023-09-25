@@ -26,12 +26,12 @@ export const sideBarList: SideBarList = [
     path: "/portfolios",
   },
   {
-    title: "industries",
+    title: "Industries",
     icon: <Industries />,
     path: "/industries",
   },
   {
-    title: "customers",
+    title: "Customers",
     icon: <Customers />,
     path: "/customers",
   },
@@ -41,7 +41,7 @@ export const sideBarList: SideBarList = [
     path: "/messages",
   },
   {
-    title: "calls",
+    title: "Calls",
     icon: <Calls />,
     path: "/calls",
   },
