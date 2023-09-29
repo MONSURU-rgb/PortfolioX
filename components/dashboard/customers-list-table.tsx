@@ -27,36 +27,6 @@ function CustomersListTable() {
 
   return (
     <div className="p-30 flex flex-col rounded-[14px] px-30 pt-22 bg-white mx-30 max-[580px]:overflow-x-auto">
-      {isLoading && (
-        <>
-          <Flex direction="row" gap={40} className="w-full">
-            <Skeleton height={50} mb="xl" visible={isLoading} width="30%" />
-            <Skeleton height={50} mb="xl" visible={isLoading} width="30%" />
-            <Skeleton height={50} mb="xl" visible={isLoading} width="30%" />
-          </Flex>
-          <Skeleton height={50} mb="xl" visible={isLoading} />
-          <Skeleton height={40} radius="xl" visible={isLoading} />
-          <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
-          <Skeleton
-            height={40}
-            mt={6}
-            width="90%"
-            radius="xl"
-            visible={isLoading}
-          />
-
-          <Skeleton height={50} circle mb="xl" visible={isLoading} />
-          <Skeleton height={40} radius="xl" visible={isLoading} />
-          <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
-          <Skeleton
-            height={40}
-            mt={6}
-            width="90%"
-            radius="xl"
-            visible={isLoading}
-          />
-        </>
-      )}
       <TableHeader header="Customers List" button={<GenerateReportButton />} />
       <section className="max-[580px]:overflow-x-auto">
         <Table striped highlightOnHover verticalSpacing={16}>
@@ -71,6 +41,51 @@ function CustomersListTable() {
             </tr>
           </thead>
           <tbody>
+            {isLoading && (
+              <>
+                <Flex direction="row" gap={40} className="w-full">
+                  <Skeleton
+                    height={50}
+                    mb="xl"
+                    visible={isLoading}
+                    width="30%"
+                  />
+                  <Skeleton
+                    height={50}
+                    mb="xl"
+                    visible={isLoading}
+                    width="30%"
+                  />
+                  <Skeleton
+                    height={50}
+                    mb="xl"
+                    visible={isLoading}
+                    width="30%"
+                  />
+                </Flex>
+                <Skeleton height={50} mb="xl" visible={isLoading} />
+                <Skeleton height={40} radius="xl" visible={isLoading} />
+                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton
+                  height={40}
+                  mt={6}
+                  width="90%"
+                  radius="xl"
+                  visible={isLoading}
+                />
+
+                <Skeleton height={50} circle mb="xl" visible={isLoading} />
+                <Skeleton height={40} radius="xl" visible={isLoading} />
+                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton
+                  height={40}
+                  mt={6}
+                  width="90%"
+                  radius="xl"
+                  visible={isLoading}
+                />
+              </>
+            )}
             {customerList?.map((item: any) => (
               <tr
                 key={item?.client_client_email}
