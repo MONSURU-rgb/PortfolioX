@@ -45,27 +45,43 @@ function CustomersListTable() {
               <>
                 <Flex direction="row" gap={40} className="w-full">
                   <Skeleton
-                    height={50}
+                    height={30}
                     mb="xl"
                     visible={isLoading}
-                    width="30%"
+                    width="100%"
                   />
                   <Skeleton
-                    height={50}
+                    height={30}
                     mb="xl"
                     visible={isLoading}
-                    width="30%"
+                    width="100%"
                   />
                   <Skeleton
-                    height={50}
+                    height={30}
                     mb="xl"
                     visible={isLoading}
-                    width="30%"
+                    width="100%"
                   />
                 </Flex>
-                <Skeleton height={50} mb="xl" visible={isLoading} />
-                <Skeleton height={40} radius="xl" visible={isLoading} />
-                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton
+                  height={30}
+                  mb="xl"
+                  visible={isLoading}
+                  width="100%"
+                />
+                <Skeleton
+                  height={30}
+                  radius="xl"
+                  visible={isLoading}
+                  width="100%"
+                />
+                <Skeleton
+                  height={30}
+                  mt={6}
+                  radius="xl"
+                  visible={isLoading}
+                  width="100%"
+                />
                 <Skeleton
                   height={40}
                   mt={6}
@@ -74,9 +90,26 @@ function CustomersListTable() {
                   visible={isLoading}
                 />
 
-                <Skeleton height={50} circle mb="xl" visible={isLoading} />
-                <Skeleton height={40} radius="xl" visible={isLoading} />
-                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton
+                  height={50}
+                  circle
+                  mb="xl"
+                  visible={isLoading}
+                  width="100%"
+                />
+                <Skeleton
+                  height={40}
+                  radius="xl"
+                  visible={isLoading}
+                  width="100%"
+                />
+                <Skeleton
+                  height={40}
+                  mt={6}
+                  radius="xl"
+                  visible={isLoading}
+                  width="100%"
+                />
                 <Skeleton
                   height={40}
                   mt={6}
