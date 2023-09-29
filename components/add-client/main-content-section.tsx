@@ -248,6 +248,7 @@ export function MainContentSection() {
         />
         <article className="flex gap-24 flex-wrap">
           <NumberInput
+            hideControls
             type="text"
             label="Total Investment"
             placeholder="Enter your investment"

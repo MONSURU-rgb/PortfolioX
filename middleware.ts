@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { useMemo } from "react";
 
 export const config = {
   matcher: [
@@ -11,6 +10,7 @@ export const config = {
     "/industries",
     "/messages",
     "/transaction-history",
+    "/customers",
   ],
 };
 
