@@ -11,6 +11,7 @@ export const config = {
     "/messages",
     "/transaction-history",
     "/customers",
+    "/customers",
   ],
 };
 
