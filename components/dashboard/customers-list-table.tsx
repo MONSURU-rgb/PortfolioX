@@ -44,79 +44,19 @@ function CustomersListTable() {
             {isLoading && (
               <>
                 <Flex direction="row" gap={40} className="w-full">
-                  <Skeleton
-                    height={30}
-                    mb="xl"
-                    visible={isLoading}
-                    width="100%"
-                  />
-                  <Skeleton
-                    height={30}
-                    mb="xl"
-                    visible={isLoading}
-                    width="100%"
-                  />
-                  <Skeleton
-                    height={30}
-                    mb="xl"
-                    visible={isLoading}
-                    width="100%"
-                  />
+                  <Skeleton height={30} mb="xl" visible={isLoading} />
+                  <Skeleton height={30} mb="xl" visible={isLoading} />
+                  <Skeleton height={30} mb="xl" visible={isLoading} />
                 </Flex>
-                <Skeleton
-                  height={30}
-                  mb="xl"
-                  visible={isLoading}
-                  width="100%"
-                />
-                <Skeleton
-                  height={30}
-                  radius="xl"
-                  visible={isLoading}
-                  width="100%"
-                />
-                <Skeleton
-                  height={30}
-                  mt={6}
-                  radius="xl"
-                  visible={isLoading}
-                  width="100%"
-                />
-                <Skeleton
-                  height={40}
-                  mt={6}
-                  width="90%"
-                  radius="xl"
-                  visible={isLoading}
-                />
+                <Skeleton height={30} mb="xl" visible={isLoading} />
+                <Skeleton height={30} radius="xl" visible={isLoading} />
+                <Skeleton height={30} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
 
-                <Skeleton
-                  height={50}
-                  circle
-                  mb="xl"
-                  visible={isLoading}
-                  width="100%"
-                />
-                <Skeleton
-                  height={40}
-                  radius="xl"
-                  visible={isLoading}
-                  width="100%"
-                />
-                <Skeleton
-                  height={40}
-                  mt={6}
-                  radius="xl"
-                  visible={isLoading}
-                  width="100%"
-                />
-                <Skeleton
-                  height={40}
-                  mt={6}
-                  width="90%"
-                  radius="xl"
-                  visible={isLoading}
-                />
+                <Skeleton height={50} circle mb="xl" visible={isLoading} />
+                <Skeleton height={40} radius="xl" visible={isLoading} />
+                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
               </>
             )}
             {customerList?.map((item: any) => (
