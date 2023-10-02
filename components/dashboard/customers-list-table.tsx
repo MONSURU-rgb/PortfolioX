@@ -43,7 +43,7 @@ function CustomersListTable() {
           <tbody>
             {isLoading && (
               <>
-                <Flex direction="row" gap={40} className="w-full">
+                <Flex direction="row" gap={20} className="w-full">
                   <Skeleton height={30} mb="xl" visible={isLoading} />
                   <Skeleton height={30} mb="xl" visible={isLoading} />
                   <Skeleton height={30} mb="xl" visible={isLoading} />
@@ -51,12 +51,12 @@ function CustomersListTable() {
                 <Skeleton height={30} mb="xl" visible={isLoading} />
                 <Skeleton height={30} radius="xl" visible={isLoading} />
                 <Skeleton height={30} mt={6} radius="xl" visible={isLoading} />
-                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton height={20} mt={6} radius="xl" visible={isLoading} />
 
-                <Skeleton height={50} circle mb="xl" visible={isLoading} />
-                <Skeleton height={40} radius="xl" visible={isLoading} />
-                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
-                <Skeleton height={40} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton height={20} circle mb="xl" visible={isLoading} />
+                <Skeleton height={20} radius="xl" visible={isLoading} />
+                <Skeleton height={20} mt={6} radius="xl" visible={isLoading} />
+                <Skeleton height={20} mt={6} radius="xl" visible={isLoading} />
               </>
             )}
             {customerList?.map((item: any) => (
