@@ -3,8 +3,8 @@ import type { NextRequest } from "next/server";
 
 export const config = {
   matcher: [
-    "/dashboard",
-    "/portfolios",
+    // "/dashboard",
+    // "/portfolios",
     "/add-client",
     "/calls",
     "/industries",
